@@ -1,21 +1,75 @@
 package folder;
 
+import folder.pieces.Bishop;
+import folder.pieces.Empty;
+import folder.pieces.King;
+import folder.pieces.Knight;
+import folder.pieces.Piece;
+import folder.pieces.Queen;
+import folder.pieces.Rook;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 
 public class ChessController {
-  public static char[][] board;
+  public static List<List<Piece>> board;
 
   public void initialize() {
-    board = new char[8][8];
-    char[] row = {'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'};
+    board = new ArrayList<List<Piece>>();
     for (int i = 0; i < 8; i++) {
-      board[0][i] = Character.toUpperCase(row[i]);
-      board[7][i] = row[i];
-      board[1][i] = 'p';
-      board[6][i] = 'P';
+      board.add(createRow(i));
     }
+  }
+
+  /**
+   * Creates a row of pieces for the board, depending on the row number. Only used when initialising
+   * the board.
+   *
+   * @param i the row number
+   * @return the row of pieces
+   */
+  private List<Piece> createRow(int i) {
+    List<Piece> row = new ArrayList<Piece>();
+
+    // Adding major black pieces
+    if (i == 0) {
+      row.add(new Rook("black"));
+      row.add(new Knight("black"));
+      row.add(new Bishop("black"));
+      row.add(new Queen("black"));
+      row.add(new King("black"));
+      row.add(new Bishop("black"));
+      row.add(new Knight("black"));
+      row.add(new Rook("black"));
+      // Adding major white pieces
+    } else if (i == 7) {
+      row.add(new Rook("white"));
+      row.add(new Knight("white"));
+      row.add(new Bishop("white"));
+      row.add(new Queen("white"));
+      row.add(new King("white"));
+      row.add(new Bishop("white"));
+      row.add(new Knight("white"));
+      row.add(new Rook("white"));
+      // Adding black pawns
+    } else if (i == 1) {
+      for (int j = 0; j < 8; j++) {
+        row.add(new folder.pieces.Pawn("black"));
+      }
+      // Adding white pawns
+    } else if (i == 6) {
+      for (int j = 0; j < 8; j++) {
+        row.add(new folder.pieces.Pawn("white"));
+      }
+      // Adding empty tiles
+    } else {
+      for (int j = 0; j < 8; j++) {
+        row.add(new Empty());
+      }
+    }
+    return row;
   }
 
   /**
@@ -30,47 +84,7 @@ public class ChessController {
     int xOrdinate = (int) (tile.getLayoutX() - 100) / 50;
     int yOrdinate = (int) tile.getLayoutY() / 50;
 
-    switch (board[yOrdinate][xOrdinate]) {
-      case 'P':
-        System.out.println("Black Pawn");
-        break;
-      case 'p':
-        System.out.println("White Pawn");
-        break;
-      case 'R':
-        System.out.println("Black Rook");
-        break;
-      case 'r':
-        System.out.println("White Rook");
-        break;
-      case 'N':
-        System.out.println("Black Knight");
-        break;
-      case 'n':
-        System.out.println("White Knight");
-        break;
-      case 'B':
-        System.out.println("Black Bishop");
-        break;
-      case 'b':
-        System.out.println("White Bishop");
-        break;
-      case 'Q':
-        System.out.println("Black Queen");
-        break;
-      case 'q':
-        System.out.println("White Queen");
-        break;
-      case 'K':
-        System.out.println("Black King");
-        break;
-      case 'k':
-        System.out.println("White King");
-        break;
-      default:
-        System.out.println("Empty");
-        break;
-    }
+    board.get(yOrdinate).get(xOrdinate).printPiece();
 
     System.out.println("  xOrdinate: " + xOrdinate);
     System.out.println("  yOrdinate: " + yOrdinate);
