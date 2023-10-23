@@ -8,7 +8,9 @@ import folder.pieces.Piece;
 import folder.pieces.Queen;
 import folder.pieces.Rook;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
@@ -16,11 +18,19 @@ import javafx.scene.shape.Rectangle;
 public class ChessController {
   public static List<List<Piece>> board;
 
+  public Set<int[]> moves;
+  public boolean pieceSelected;
+  public Piece selectedPiece;
+  public int[] selectedPos;
+  public String turn;
+
   public void initialize() {
     board = new ArrayList<List<Piece>>();
     for (int i = 0; i < 8; i++) {
       board.add(createRow(i));
     }
+    pieceSelected = false;
+    turn = "white";
   }
 
   /**
@@ -84,9 +94,64 @@ public class ChessController {
     int xOrdinate = (int) (tile.getLayoutX() - 100) / 50;
     int yOrdinate = (int) tile.getLayoutY() / 50;
 
-    board.get(yOrdinate).get(xOrdinate).printPiece();
+    Piece piece = board.get(yOrdinate).get(xOrdinate);
+    if (!piece.getType().equals("empty") && piece.getColour().equals(turn)) {
+      select(xOrdinate, yOrdinate);
+    }
 
+    if (pieceSelected
+        && moves.stream().anyMatch(c -> Arrays.equals(c, new int[] {xOrdinate, yOrdinate}))) {
+      move(xOrdinate, yOrdinate);
+    }
+
+    printTurnDetails(piece, xOrdinate, yOrdinate);
+  }
+
+  /**
+   * Method called when moving a piece. Sets the selected piece to an empty tile and the tile at the
+   * given coordinates to the selected piece.
+   *
+   * @param xOrdinate The x ordinate of the tile to move to.
+   * @param yOrdinate The y ordinate of the tile to move to.
+   */
+  private void move(int xOrdinate, int yOrdinate) {
+    board.get(selectedPos[1]).set(selectedPos[0], new Empty());
+    board.get(yOrdinate).set(xOrdinate, selectedPiece);
+    pieceSelected = false;
+    turn = turn.equals("white") ? "black" : "white";
+  }
+
+  /**
+   * Method called when selecting a piece. Sets the selected piece, the selected position, and the
+   * possible moves for the selected piece.
+   *
+   * @param xOrdinate The x ordinate of the selected piece.
+   * @param yOrdinate The y ordinate of the selected piece.
+   */
+  private void select(int xOrdinate, int yOrdinate) {
+    selectedPiece = board.get(yOrdinate).get(xOrdinate);
+    selectedPos = new int[] {xOrdinate, yOrdinate};
+    moves = selectedPiece.moveSet(xOrdinate, yOrdinate);
+    pieceSelected = true;
+  }
+
+  /**
+   * Printing out what piece has been clicked, which piece has been selected, the possible moves for
+   * the selected piece, and the current coordinates of the clicked piece.
+   *
+   * @param piece The piece that has been clicked.
+   * @param xOrdinate The x ordinate of the clicked piece.
+   * @param yOrdinate The y ordinate of the clicked piece.
+   */
+  private void printTurnDetails(Piece piece, int xOrdinate, int yOrdinate) {
+    piece.printPiece();
+    System.out.println("  pieceSelected: " + pieceSelected);
+    System.out.println("  selectedPiece: " + selectedPiece.getType());
+    // Printing all the possible moves
+    for (int[] move : moves) {
+      System.out.println("  move: " + move[0] + ", " + move[1]);
+    }
     System.out.println("  xOrdinate: " + xOrdinate);
-    System.out.println("  yOrdinate: " + yOrdinate);
+    System.out.println("  yOrdinate: " + yOrdinate + "\n");
   }
 }

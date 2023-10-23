@@ -21,17 +21,17 @@ public class Pawn extends Piece {
     Set<int[]> moves = new HashSet<int[]>();
     if (this.colour.equals("white")) {
       if (yOrdinate + 1 < 8) {
-        moves.add(new int[] {xOrdinate, yOrdinate + 1});
-      }
-      if (!hasMoved) {
-        moves.add(new int[] {xOrdinate, yOrdinate + 2});
-      }
-    } else {
-      if (yOrdinate - 1 >= 0) {
         moves.add(new int[] {xOrdinate, yOrdinate - 1});
       }
       if (!hasMoved) {
         moves.add(new int[] {xOrdinate, yOrdinate - 2});
+      }
+    } else {
+      if (yOrdinate - 1 >= 0) {
+        moves.add(new int[] {xOrdinate, yOrdinate + 1});
+      }
+      if (!hasMoved) {
+        moves.add(new int[] {xOrdinate, yOrdinate + 2});
       }
     }
     return moves;

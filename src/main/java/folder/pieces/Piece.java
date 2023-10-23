@@ -14,11 +14,11 @@ public abstract class Piece {
     System.out.println(this.colour + " " + this.type);
   }
 
-  public boolean equals(Piece other) {
-    return other.type.equals(this.type);
+  public String getType() {
+    return this.type;
   }
 
-  public boolean sameColour(Piece other) {
-    return other.colour.equals(this.colour);
+  public String getColour() {
+    return this.colour;
   }
 }
