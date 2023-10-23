@@ -7,7 +7,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="folder.ChessController">
    <children>
-      <ImageView fitHeight="400.0" fitWidth="714.0" layoutX="-57.0" rotate="90.0">
+      <ImageView id="Wood texture" fitHeight="400.0" fitWidth="714.0" layoutX="-57.0" rotate="90.0">
          <image>
             <Image url="@../images/texture.JPG" />
          </image>
@@ -76,5 +76,165 @@
       <Rectangle arcWidth="5.0" fill="#ffe8c8" height="50.0" layoutX="450.0" layoutY="250.0" onMouseClicked="#onClicked" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="50.0" />
       <Rectangle arcWidth="5.0" fill="#c34949" height="50.0" layoutX="450.0" layoutY="300.0" onMouseClicked="#onClicked" opacity="0.75" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="50.0" />
       <Rectangle arcWidth="5.0" fill="#ffe8c8" height="50.0" layoutX="450.0" layoutY="350.0" onMouseClicked="#onClicked" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="50.0" />
+      <ImageView id="Black Bishop 1" fx:id="bBishopOne" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="200.0">
+         <image>
+            <Image url="@../images/black-bishop.png" />
+         </image>
+      </ImageView>
+      <ImageView id="Black Bishop 2" fx:id="bBishopTwo" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="350.0">
+         <image>
+            <Image url="@../images/black-bishop.png" />
+         </image>
+      </ImageView>
+      <ImageView id="Black King" fx:id="bKing" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="300.0">
+         <image>
+            <Image url="@../images/black-king.png" />
+         </image>
+      </ImageView>
+      <ImageView id="Black Kinght 1" fx:id="bKnightOne" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="150.0">
+         <image>
+            <Image url="@../images/black-knight.png" />
+         </image>
+      </ImageView>
+      <ImageView id="Black Kinght 2" fx:id="bKnightTwo" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="400.0">
+         <image>
+            <Image url="@../images/black-knight.png" />
+         </image>
+      </ImageView>
+      <ImageView id="Black Pawn 1" fx:id="bPawnOne" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="100.0" layoutY="50.0">
+         <image>
+            <Image url="@../images/black-pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView id="Black Pawn 2" fx:id="bPawnTwo" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="150.0" layoutY="50.0">
+         <image>
+            <Image url="@../images/black-pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView id="Black Pawn 3" fx:id="bPawnThree" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="200.0" layoutY="50.0">
+         <image>
+            <Image url="@../images/black-pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView id="Black Pawn 4" fx:id="bPawnFour" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="250.0" layoutY="50.0">
+         <image>
+            <Image url="@../images/black-pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView id="Black Pawn 5" fx:id="bPawnFive" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="300.0" layoutY="50.0">
+         <image>
+            <Image url="@../images/black-pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView id="Black Pawn 6" fx:id="bPawnSix" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="350.0" layoutY="50.0">
+         <image>
+            <Image url="@../images/black-pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView id="Black Pawn 7" fx:id="bPawnSeven" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="400.0" layoutY="50.0">
+         <image>
+            <Image url="@../images/black-pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView id="Black Pawn 8" fx:id="bPawnEight" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="450.0" layoutY="50.0">
+         <image>
+            <Image url="@../images/black-pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView id="Black Queen" fx:id="bQueen" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="250.0">
+         <image>
+            <Image url="@../images/black-queen.png" />
+         </image>
+      </ImageView>
+      <ImageView id="Black Rook 1" fx:id="bRookOne" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="100.0">
+         <image>
+            <Image url="@../images/black-rook.png" />
+         </image>
+      </ImageView>
+      <ImageView id="Black Rook 2" fx:id="bRookTwo" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="450.0">
+         <image>
+            <Image url="@../images/black-rook.png" />
+         </image>
+      </ImageView>
+      <ImageView id="White Bishop 1" fx:id="wBishopOne" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="200.0" layoutY="350.0">
+         <image>
+            <Image url="@../images/white-bishop.png" />
+         </image>
+      </ImageView>
+      <ImageView id="White Bishop 2" fx:id="wBishopTwo" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="350.0" layoutY="350.0">
+         <image>
+            <Image url="@../images/white-bishop.png" />
+         </image>
+      </ImageView>
+      <ImageView id="White King" fx:id="wKing" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="300.0" layoutY="350.0">
+         <image>
+            <Image url="@../images/white-king.png" />
+         </image>
+      </ImageView>
+      <ImageView id="White Knight 1" fx:id="wKnightOne" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="150.0" layoutY="350.0">
+         <image>
+            <Image url="@../images/white-knight.png" />
+         </image>
+      </ImageView>
+      <ImageView id="White Knight 2" fx:id="wKnightTwo" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="400.0" layoutY="350.0">
+         <image>
+            <Image url="@../images/white-knight.png" />
+         </image>
+      </ImageView>
+      <ImageView id="White Pawn 1" fx:id="wPawnOne" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="100.0" layoutY="300.0">
+         <image>
+            <Image url="@../images/white-pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView id="White Pawn 2" fx:id="wPawnTwo" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="150.0" layoutY="300.0">
+         <image>
+            <Image url="@../images/white-pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView id="White Pawn 3" fx:id="wPawnThree" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="200.0" layoutY="300.0">
+         <image>
+            <Image url="@../images/white-pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView id="White Pawn 4" fx:id="wPawnFour" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="250.0" layoutY="300.0">
+         <image>
+            <Image url="@../images/white-pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView id="White Pawn 5" fx:id="wPawnFive" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="300.0" layoutY="300.0">
+         <image>
+            <Image url="@../images/white-pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView id="White Pawn 6" fx:id="wPawnSix" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="350.0" layoutY="300.0">
+         <image>
+            <Image url="@../images/white-pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView id="White Pawn 7" fx:id="wPawnSeven" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="400.0" layoutY="300.0">
+         <image>
+            <Image url="@../images/white-pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView id="White Pawn 8" fx:id="wPawnEight" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="450.0" layoutY="300.0">
+         <image>
+            <Image url="@../images/white-pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView id="White Queen" fx:id="wQueen" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="250.0" layoutY="350.0">
+         <image>
+            <Image url="@../images/white-queen.png" />
+         </image>
+      </ImageView>
+      <ImageView id="White Rook 1" fx:id="wRookOne" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="100.0" layoutY="350.0">
+         <image>
+            <Image url="@../images/white-rook.png" />
+         </image>
+      </ImageView>
+      <ImageView id="White Rook 2" fx:id="wRookTwo" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="450.0" layoutY="350.0">
+         <image>
+            <Image url="@../images/white-rook.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

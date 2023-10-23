@@ -2,11 +2,13 @@ package folder.pieces;
 
 import java.util.HashSet;
 import java.util.Set;
+import javafx.scene.image.ImageView;
 
 public class King extends Piece {
-  public King(String colour) {
+  public King(String colour, ImageView image) {
     this.colour = colour;
     this.type = "king";
+    this.image = image;
   }
 
   // TODO: Add castling mechanic

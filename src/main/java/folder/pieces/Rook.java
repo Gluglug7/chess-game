@@ -2,11 +2,14 @@ package folder.pieces;
 
 import java.util.HashSet;
 import java.util.Set;
+import javafx.scene.image.ImageView;
 
 public class Rook extends Piece {
-  public Rook(String colour) {
+  public Rook(String colour, ImageView image) {
     this.colour = colour;
     this.type = "rook";
+    this.hasMoved = false;
+    this.image = image;
   }
 
   /**
@@ -18,7 +21,7 @@ public class Rook extends Piece {
    */
   public Set<int[]> moveSet(int xOrdinate, int yOrdinate) {
     Set<int[]> moves = new HashSet<int[]>();
-    for (int i = 0; i < 8; i++) {
+    for (int i = 1; i < 8; i++) {
       // Handling adding horizontal and vertical moves
       if (xOrdinate + i < 8) {
         moves.add(new int[] {xOrdinate + i, yOrdinate});

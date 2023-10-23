@@ -2,12 +2,14 @@ package folder.pieces;
 
 import java.util.HashSet;
 import java.util.Set;
+import javafx.scene.image.ImageView;
 
 public class Pawn extends Piece {
-  public Pawn(String colour) {
+  public Pawn(String colour, ImageView image) {
     this.colour = colour;
     this.type = "pawn";
     this.hasMoved = false;
+    this.image = image;
   }
 
   /**

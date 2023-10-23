@@ -2,11 +2,13 @@ package folder.pieces;
 
 import java.util.HashSet;
 import java.util.Set;
+import javafx.scene.image.ImageView;
 
 public class Knight extends Piece {
-  public Knight(String colour) {
+  public Knight(String colour, ImageView image) {
     this.colour = colour;
     this.type = "knight";
+    this.image = image;
   }
 
   /**

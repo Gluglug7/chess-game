@@ -2,11 +2,13 @@ package folder.pieces;
 
 import java.util.HashSet;
 import java.util.Set;
+import javafx.scene.image.ImageView;
 
 public class Bishop extends Piece {
-  public Bishop(String colour) {
+  public Bishop(String colour, ImageView image) {
     this.colour = colour;
     this.type = "bishop";
+    this.image = image;
   }
 
   /**
@@ -19,7 +21,7 @@ public class Bishop extends Piece {
   public Set<int[]> moveSet(int xOrdinate, int yOrdinate) {
     Set<int[]> moves = new HashSet<int[]>();
     // Handling adding all the possible diagonals
-    for (int i = 0; i < 8; i++) {
+    for (int i = 1; i < 8; i++) {
       if (xOrdinate + i < 8 && yOrdinate + i < 8) {
         moves.add(new int[] {xOrdinate + i, yOrdinate + i});
       }
