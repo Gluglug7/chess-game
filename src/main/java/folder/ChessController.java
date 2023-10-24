@@ -4,11 +4,13 @@ import folder.pieces.Bishop;
 import folder.pieces.Empty;
 import folder.pieces.King;
 import folder.pieces.Knight;
+import folder.pieces.Pawn;
 import folder.pieces.Piece;
 import folder.pieces.Queen;
 import folder.pieces.Rook;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javafx.fxml.FXML;
@@ -54,6 +56,8 @@ public class ChessController {
   @FXML private ImageView wPawnEight;
 
   public Set<int[]> moves;
+  public Set<Piece> whitePieces;
+  public Set<Piece> blackPieces;
   public boolean pieceSelected;
   public Piece selectedPiece;
   public ImageView selectedImage;
@@ -64,6 +68,14 @@ public class ChessController {
     board = new ArrayList<List<Piece>>();
     for (int i = 0; i < 8; i++) {
       board.add(createRow(i));
+    }
+    whitePieces = new HashSet<Piece>();
+    blackPieces = new HashSet<Piece>();
+    for (int i = 0; i < 8; i++) {
+      whitePieces.add(board.get(7).get(i));
+      whitePieces.add(board.get(6).get(i));
+      blackPieces.add(board.get(0).get(i));
+      blackPieces.add(board.get(1).get(i));
     }
     pieceSelected = false;
     turn = "white";
@@ -81,44 +93,44 @@ public class ChessController {
 
     // Adding major black pieces
     if (i == 0) {
-      row.add(new Rook("black", bRookOne));
-      row.add(new Knight("black", bKnightOne));
-      row.add(new Bishop("black", bBishopOne));
-      row.add(new Queen("black", bQueen));
-      row.add(new King("black", bKing));
-      row.add(new Bishop("black", bBishopTwo));
-      row.add(new Knight("black", bKnightTwo));
-      row.add(new Rook("black", bRookTwo));
+      row.add(new Rook("black", bRookOne, 0, 0));
+      row.add(new Knight("black", bKnightOne, 1, 0));
+      row.add(new Bishop("black", bBishopOne, 2, 0));
+      row.add(new Queen("black", bQueen, 3, 0));
+      row.add(new King("black", bKing, 4, 0));
+      row.add(new Bishop("black", bBishopTwo, 5, 0));
+      row.add(new Knight("black", bKnightTwo, 6, 0));
+      row.add(new Rook("black", bRookTwo, 7, 0));
       // Adding major white pieces
     } else if (i == 7) {
-      row.add(new Rook("white", wRookOne));
-      row.add(new Knight("white", wKnightOne));
-      row.add(new Bishop("white", wBishopOne));
-      row.add(new Queen("white", wQueen));
-      row.add(new King("white", wKing));
-      row.add(new Bishop("white", wBishopTwo));
-      row.add(new Knight("white", wKnightTwo));
-      row.add(new Rook("white", wRookTwo));
+      row.add(new Rook("white", wRookOne, 0, 7));
+      row.add(new Knight("white", wKnightOne, 1, 7));
+      row.add(new Bishop("white", wBishopOne, 2, 7));
+      row.add(new Queen("white", wQueen, 3, 7));
+      row.add(new King("white", wKing, 4, 7));
+      row.add(new Bishop("white", wBishopTwo, 5, 7));
+      row.add(new Knight("white", wKnightTwo, 6, 7));
+      row.add(new Rook("white", wRookTwo, 7, 7));
       // Adding black pawns
     } else if (i == 1) {
-      row.add(new folder.pieces.Pawn("black", bPawnOne));
-      row.add(new folder.pieces.Pawn("black", bPawnTwo));
-      row.add(new folder.pieces.Pawn("black", bPawnThree));
-      row.add(new folder.pieces.Pawn("black", bPawnFour));
-      row.add(new folder.pieces.Pawn("black", bPawnFive));
-      row.add(new folder.pieces.Pawn("black", bPawnSix));
-      row.add(new folder.pieces.Pawn("black", bPawnSeven));
-      row.add(new folder.pieces.Pawn("black", bPawnEight));
+      row.add(new Pawn("black", bPawnOne, 0, 1));
+      row.add(new Pawn("black", bPawnTwo, 1, 1));
+      row.add(new Pawn("black", bPawnThree, 2, 1));
+      row.add(new Pawn("black", bPawnFour, 3, 1));
+      row.add(new Pawn("black", bPawnFive, 4, 1));
+      row.add(new Pawn("black", bPawnSix, 5, 1));
+      row.add(new Pawn("black", bPawnSeven, 6, 1));
+      row.add(new Pawn("black", bPawnEight, 7, 1));
       // Adding white pawns
     } else if (i == 6) {
-      row.add(new folder.pieces.Pawn("white", wPawnOne));
-      row.add(new folder.pieces.Pawn("white", wPawnTwo));
-      row.add(new folder.pieces.Pawn("white", wPawnThree));
-      row.add(new folder.pieces.Pawn("white", wPawnFour));
-      row.add(new folder.pieces.Pawn("white", wPawnFive));
-      row.add(new folder.pieces.Pawn("white", wPawnSix));
-      row.add(new folder.pieces.Pawn("white", wPawnSeven));
-      row.add(new folder.pieces.Pawn("white", wPawnEight));
+      row.add(new Pawn("white", wPawnOne, 0, 6));
+      row.add(new Pawn("white", wPawnTwo, 1, 6));
+      row.add(new Pawn("white", wPawnThree, 2, 6));
+      row.add(new Pawn("white", wPawnFour, 3, 6));
+      row.add(new Pawn("white", wPawnFive, 4, 6));
+      row.add(new Pawn("white", wPawnSix, 5, 6));
+      row.add(new Pawn("white", wPawnSeven, 6, 6));
+      row.add(new Pawn("white", wPawnEight, 7, 6));
       // Adding empty tiles
     } else {
       for (int j = 0; j < 8; j++) {
@@ -142,9 +154,22 @@ public class ChessController {
 
     Piece piece = board.get(yOrdinate).get(xOrdinate);
     if (pieceSelected) {
-      if (moves.stream().anyMatch(c -> Arrays.equals(c, new int[] {xOrdinate, yOrdinate}))) {
+      if (moves.stream().anyMatch(c -> Arrays.equals(c, new int[] {xOrdinate, yOrdinate}))
+          && selectedPiece.getColour().equals(this.turn)) {
+        // Removing the piece from the board if taken
+        // Could include a remove method for each piece that moves it to a position to the side of
+        // the boards
+        if (!piece.getType().equals("empty")) {
+          piece.getImage().setLayoutX(-50);
+          if (piece.getColour().equals("white")) {
+            whitePieces.remove(piece);
+          } else {
+            blackPieces.remove(piece);
+          }
+        }
         move(xOrdinate, yOrdinate);
         pieceSelected = false;
+        turn = turn.equals("white") ? "black" : "white";
       }
     }
     if (piece.getColour().equals(this.turn) && !piece.getType().equals("empty")) {
@@ -166,9 +191,11 @@ public class ChessController {
     board.get(selectedPos[1]).set(selectedPos[0], new Empty());
     board.get(yOrdinate).set(xOrdinate, selectedPiece);
     selectedPiece.hasMoved();
+    selectedPiece.setX(xOrdinate);
+    selectedPiece.setY(yOrdinate);
     selectedImage.setLayoutX(xOrdinate * 50 + 100);
     selectedImage.setLayoutY(yOrdinate * 50);
-    turn = turn.equals("white") ? "black" : "white";
+    checkAllChecks();
   }
 
   /**
@@ -204,5 +231,49 @@ public class ChessController {
     }
     System.out.println("  xOrdinate: " + xOrdinate);
     System.out.println("  yOrdinate: " + yOrdinate + "\n");
+  }
+
+  /**
+   * Method to check whether either side is in check. Calls the checkCheck method for both sides.
+   */
+  private void checkAllChecks() {
+    checkCheck("white", board);
+    checkCheck("black", board);
+  }
+
+  /**
+   * Method to check whether one side is in check or not. Method goes through all opposing pieces
+   * and checks if any of them can move to the king's position. If at least one can, then it is a
+   * check.
+   *
+   * @param colour The colour of the king to check.
+   * @param boardToCheck The board to check for a check.
+   */
+  private boolean checkCheck(String colour, List<List<Piece>> boardToCheck) {
+    ImageView king = colour.equals("white") ? wKing : bKing;
+    int kingX = (int) (king.getLayoutX() - 100) / 50;
+    int kingY = (int) king.getLayoutY() / 50;
+
+    for (int i = 0; i < 8; i++) {
+      for (int j = 0; j < 8; j++) {
+        Piece piece = boardToCheck.get(i).get(j);
+        if (!piece.getColour().equals(colour) && !piece.getType().equals("empty")) {
+          // Using the piece location to get the possible moves for that piece
+          Set<int[]> potentialMoves = piece.moveSet(j, i, boardToCheck);
+          if (potentialMoves == null) {
+            continue;
+          }
+          // If a check is found, then the check is printed and the check boolean is set to true
+          // and the function is returned
+          if (potentialMoves.stream().anyMatch(c -> Arrays.equals(c, new int[] {kingX, kingY}))) {
+            GameState.wCheck = colour.equals("white") ? true : false;
+            GameState.bCheck = colour.equals("black") ? true : false;
+            System.out.println(colour + " king is in check");
+            return true;
+          }
+        }
+      }
+    }
+    return false;
   }
 }

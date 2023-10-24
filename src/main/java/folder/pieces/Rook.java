@@ -6,11 +6,13 @@ import java.util.Set;
 import javafx.scene.image.ImageView;
 
 public class Rook extends Piece {
-  public Rook(String colour, ImageView image) {
+  public Rook(String colour, ImageView image, int xOrdinate, int yOrdinate) {
     this.colour = colour;
     this.type = "rook";
     this.hasMoved = false;
     this.image = image;
+    this.xOrdinate = xOrdinate;
+    this.yOrdinate = yOrdinate;
   }
 
   /**

@@ -6,10 +6,12 @@ import java.util.Set;
 import javafx.scene.image.ImageView;
 
 public class Bishop extends Piece {
-  public Bishop(String colour, ImageView image) {
+  public Bishop(String colour, ImageView image, int xOrdinate, int yOrdinate) {
     this.colour = colour;
     this.type = "bishop";
     this.image = image;
+    this.xOrdinate = xOrdinate;
+    this.yOrdinate = yOrdinate;
   }
 
   /**

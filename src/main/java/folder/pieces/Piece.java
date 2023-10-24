@@ -11,6 +11,9 @@ public abstract class Piece {
   protected boolean hasMoved;
   protected ImageView image;
 
+  protected int xOrdinate;
+  protected int yOrdinate;
+
   public abstract Set<int[]> moveSet(int xOrdinate, int yOrdinate, List<List<Piece>> board);
 
   public void printPiece() {
@@ -31,5 +34,21 @@ public abstract class Piece {
 
   public void hasMoved() {
     this.hasMoved = true;
+  }
+
+  public int getX() {
+    return this.xOrdinate;
+  }
+
+  public int getY() {
+    return this.yOrdinate;
+  }
+
+  public void setX(int x) {
+    this.xOrdinate = x;
+  }
+
+  public void setY(int y) {
+    this.yOrdinate = y;
   }
 }

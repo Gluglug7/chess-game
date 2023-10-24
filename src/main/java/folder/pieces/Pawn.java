@@ -6,11 +6,13 @@ import java.util.Set;
 import javafx.scene.image.ImageView;
 
 public class Pawn extends Piece {
-  public Pawn(String colour, ImageView image) {
+  public Pawn(String colour, ImageView image, int xOrdinate, int yOrdinate) {
     this.colour = colour;
     this.type = "pawn";
     this.hasMoved = false;
     this.image = image;
+    this.xOrdinate = xOrdinate;
+    this.yOrdinate = yOrdinate;
   }
 
   /**

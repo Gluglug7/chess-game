@@ -6,10 +6,12 @@ import java.util.Set;
 import javafx.scene.image.ImageView;
 
 public class Queen extends Piece {
-  public Queen(String colour, ImageView image) {
+  public Queen(String colour, ImageView image, int xOrdinate, int yOrdinate) {
     this.colour = colour;
     this.type = "queen";
     this.image = image;
+    this.xOrdinate = xOrdinate;
+    this.yOrdinate = yOrdinate;
   }
 
   /**
