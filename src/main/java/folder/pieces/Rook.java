@@ -22,65 +22,58 @@ public class Rook extends Piece {
    */
   public Set<int[]> moveSet(int xOrdinate, int yOrdinate, List<List<Piece>> board) {
     Set<int[]> moves = new HashSet<int[]>();
-    // Handling adding all the possible horizontal and vertical moves
+    boolean north = true;
+    boolean east = true;
+    boolean south = true;
+    boolean west = true;
+
     for (int i = 1; i < 8; i++) {
-      if (xOrdinate + i < 8
-          && !board.get(yOrdinate).get(xOrdinate + i).getColour().equals(this.colour)) {
-        if (board.get(yOrdinate).get(xOrdinate + i).getType().equals("empty")) {
-          moves.add(new int[] {xOrdinate + i, yOrdinate});
-        } else if (board.get(yOrdinate).get(xOrdinate + i).getColour() != this.colour) {
-          moves.add(new int[] {xOrdinate + i, yOrdinate});
-          break;
-        } else {
-          break;
-        }
-      } else {
-        break;
-      }
-    }
-    for (int i = 1; i < 8; i++) {
-      if (xOrdinate - i >= 0
-          && !board.get(yOrdinate).get(xOrdinate - i).getColour().equals(this.colour)) {
-        if (board.get(yOrdinate).get(xOrdinate - i).getType().equals("empty")) {
-          moves.add(new int[] {xOrdinate - i, yOrdinate});
-        } else if (board.get(yOrdinate).get(xOrdinate - i).getColour() != this.colour) {
-          moves.add(new int[] {xOrdinate - i, yOrdinate});
-          break;
-        } else {
-          break;
-        }
-      } else {
-        break;
-      }
-    }
-    for (int i = 1; i < 8; i++) {
-      if (yOrdinate + i < 8
-          && !board.get(yOrdinate + i).get(xOrdinate).getColour().equals(this.colour)) {
-        if (board.get(yOrdinate + i).get(xOrdinate).getType().equals("empty")) {
-          moves.add(new int[] {xOrdinate, yOrdinate + i});
-        } else if (board.get(yOrdinate + i).get(xOrdinate).getColour() != this.colour) {
-          moves.add(new int[] {xOrdinate, yOrdinate + i});
-          break;
-        } else {
-          break;
-        }
-      } else {
-        break;
-      }
-    }
-    for (int i = 1; i < 8; i++) {
-      if (yOrdinate - i >= 0
-          && !board.get(yOrdinate - i).get(xOrdinate).getColour().equals(this.colour)) {
+      // Handling rook moving upwards
+      if (north && yOrdinate - i >= 0) {
         if (board.get(yOrdinate - i).get(xOrdinate).getType().equals("empty")) {
           moves.add(new int[] {xOrdinate, yOrdinate - i});
-        } else if (board.get(yOrdinate - i).get(xOrdinate).getColour() != this.colour) {
+        } else if (!board.get(yOrdinate - i).get(xOrdinate).getColour().equals(this.colour)) {
           moves.add(new int[] {xOrdinate, yOrdinate - i});
-          break;
+          north = false;
         } else {
-          break;
+          north = false;
         }
-      } else {
-        break;
+      }
+
+      // Handling rook moving right
+      if (east && xOrdinate + i < 8) {
+        if (board.get(yOrdinate).get(xOrdinate + i).getType().equals("empty")) {
+          moves.add(new int[] {xOrdinate + i, yOrdinate});
+        } else if (!board.get(yOrdinate).get(xOrdinate + i).getColour().equals(this.colour)) {
+          moves.add(new int[] {xOrdinate + i, yOrdinate});
+          east = false;
+        } else {
+          east = false;
+        }
+      }
+
+      // Handling rook moving downwards
+      if (south && yOrdinate + i < 8) {
+        if (board.get(yOrdinate + i).get(xOrdinate).getType().equals("empty")) {
+          moves.add(new int[] {xOrdinate, yOrdinate + i});
+        } else if (!board.get(yOrdinate + i).get(xOrdinate).getColour().equals(this.colour)) {
+          moves.add(new int[] {xOrdinate, yOrdinate + i});
+          south = false;
+        } else {
+          south = false;
+        }
+      }
+
+      // Handling rook moving left
+      if (west && xOrdinate - i >= 0) {
+        if (board.get(yOrdinate).get(xOrdinate - i).getType().equals("empty")) {
+          moves.add(new int[] {xOrdinate - i, yOrdinate});
+        } else if (!board.get(yOrdinate).get(xOrdinate - i).getColour().equals(this.colour)) {
+          moves.add(new int[] {xOrdinate - i, yOrdinate});
+          west = false;
+        } else {
+          west = false;
+        }
       }
     }
     return moves;

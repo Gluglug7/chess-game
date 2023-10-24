@@ -21,69 +21,59 @@ public class Bishop extends Piece {
    */
   public Set<int[]> moveSet(int xOrdinate, int yOrdinate, List<List<Piece>> board) {
     Set<int[]> moves = new HashSet<int[]>();
-    // Handling adding all the possible diagonals
+
+    boolean northEast = true;
+    boolean southEast = true;
+    boolean southWest = true;
+    boolean northWest = true;
+
     for (int i = 1; i < 8; i++) {
-      if (xOrdinate + i < 8
-          && yOrdinate + i < 8
-          && !board.get(yOrdinate + i).get(xOrdinate + i).getColour().equals(this.colour)) {
-        if (board.get(yOrdinate + i).get(xOrdinate + i).getType().equals("empty")) {
-          moves.add(new int[] {xOrdinate + i, yOrdinate + i});
-        } else if (board.get(yOrdinate + i).get(xOrdinate + i).getColour() != this.colour) {
-          moves.add(new int[] {xOrdinate + i, yOrdinate + i});
-          break;
-        } else {
-          break;
-        }
-      } else {
-        break;
-      }
-    }
-    for (int i = 1; i < 8; i++) {
-      if (xOrdinate + i < 8
-          && yOrdinate - i >= 0
-          && !board.get(yOrdinate - i).get(xOrdinate + i).getColour().equals(this.colour)) {
+      // Handling bishop moving diagonally upwards and right
+      if (northEast && xOrdinate + i < 8 && yOrdinate - i >= 0) {
         if (board.get(yOrdinate - i).get(xOrdinate + i).getType().equals("empty")) {
           moves.add(new int[] {xOrdinate + i, yOrdinate - i});
-        } else if (board.get(yOrdinate - i).get(xOrdinate + i).getColour() != this.colour) {
+        } else if (!board.get(yOrdinate - i).get(xOrdinate + i).getColour().equals(this.colour)) {
           moves.add(new int[] {xOrdinate + i, yOrdinate - i});
-          break;
+          northEast = false;
         } else {
-          break;
+          northEast = false;
         }
-      } else {
-        break;
       }
-    }
-    for (int i = 1; i < 8; i++) {
-      if (xOrdinate - i >= 0
-          && yOrdinate + i < 8
-          && !board.get(yOrdinate + i).get(xOrdinate - i).getColour().equals(this.colour)) {
+
+      // Handling bishop moving diagonally downwards and right
+      if (southEast && xOrdinate + i < 8 && yOrdinate + i < 8) {
+        if (board.get(yOrdinate + i).get(xOrdinate + i).getType().equals("empty")) {
+          moves.add(new int[] {xOrdinate + i, yOrdinate + i});
+        } else if (!board.get(yOrdinate + i).get(xOrdinate + i).getColour().equals(this.colour)) {
+          moves.add(new int[] {xOrdinate + i, yOrdinate + i});
+          southEast = false;
+        } else {
+          southEast = false;
+        }
+      }
+
+      // Handling bishop moving diagonally downwards and left
+      if (southWest && xOrdinate - i >= 0 && yOrdinate + i < 8) {
         if (board.get(yOrdinate + i).get(xOrdinate - i).getType().equals("empty")) {
           moves.add(new int[] {xOrdinate - i, yOrdinate + i});
-        } else if (board.get(yOrdinate + i).get(xOrdinate - i).getColour() != this.colour) {
+        } else if (!board.get(yOrdinate + i).get(xOrdinate - i).getColour().equals(this.colour)) {
           moves.add(new int[] {xOrdinate - i, yOrdinate + i});
-          break;
+          southWest = false;
         } else {
-          break;
+          southWest = false;
         }
-      } else {
-        break;
       }
-    }
-    for (int i = 1; i < 8; i++) {
-      if (xOrdinate - i >= 0
-          && yOrdinate - i >= 0
-          && !board.get(yOrdinate - i).get(xOrdinate - i).getColour().equals(this.colour)) {
+
+      // Handling bishop moving diagonally upwards and left
+      if (northWest && xOrdinate - i >= 0 && yOrdinate - i >= 0) {
         if (board.get(yOrdinate - i).get(xOrdinate - i).getType().equals("empty")) {
           moves.add(new int[] {xOrdinate - i, yOrdinate - i});
-        } else if (board.get(yOrdinate - i).get(xOrdinate - i).getColour() != this.colour) {
+        } else if (!board.get(yOrdinate - i).get(xOrdinate - i).getColour().equals(this.colour)) {
           moves.add(new int[] {xOrdinate - i, yOrdinate - i});
-          break;
+          northWest = false;
         } else {
-          break;
+          northWest = false;
         }
-      } else {
-        break;
       }
     }
     return moves;
