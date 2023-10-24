@@ -1,5 +1,6 @@
 package folder.pieces;
 
+import java.util.List;
 import java.util.Set;
 import javafx.scene.image.ImageView;
 
@@ -10,7 +11,7 @@ public abstract class Piece {
   protected boolean hasMoved;
   protected ImageView image;
 
-  public abstract Set<int[]> moveSet(int xOrdinate, int yOrdinate);
+  public abstract Set<int[]> moveSet(int xOrdinate, int yOrdinate, List<List<Piece>> board);
 
   public void printPiece() {
     System.out.println(this.colour + " " + this.type);
@@ -26,5 +27,9 @@ public abstract class Piece {
 
   public ImageView getImage() {
     return this.image;
+  }
+
+  public void hasMoved() {
+    this.hasMoved = true;
   }
 }

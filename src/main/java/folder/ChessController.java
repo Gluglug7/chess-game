@@ -165,6 +165,7 @@ public class ChessController {
   private void move(int xOrdinate, int yOrdinate) {
     board.get(selectedPos[1]).set(selectedPos[0], new Empty());
     board.get(yOrdinate).set(xOrdinate, selectedPiece);
+    selectedPiece.hasMoved();
     selectedImage.setLayoutX(xOrdinate * 50 + 100);
     selectedImage.setLayoutY(yOrdinate * 50);
     turn = turn.equals("white") ? "black" : "white";
@@ -181,7 +182,7 @@ public class ChessController {
     selectedPiece = board.get(yOrdinate).get(xOrdinate);
     selectedPos = new int[] {xOrdinate, yOrdinate};
     selectedImage = selectedPiece.getImage();
-    moves = selectedPiece.moveSet(xOrdinate, yOrdinate);
+    moves = selectedPiece.moveSet(xOrdinate, yOrdinate, board);
   }
 
   /**
