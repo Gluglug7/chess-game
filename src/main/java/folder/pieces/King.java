@@ -14,7 +14,6 @@ public class King extends Piece {
     this.yOrdinate = yOrdinate;
   }
 
-  // TODO: Add castling mechanic
   /**
    * Returns a set of all possible moves for a king at a given position.
    *

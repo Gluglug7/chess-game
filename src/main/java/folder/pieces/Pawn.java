@@ -15,6 +15,7 @@ public class Pawn extends Piece {
     this.yOrdinate = yOrdinate;
   }
 
+  // TODO: Add pawn promotion mechanic
   /**
    * Returns a set of all possible moves for a pawn at the given coordinates. Pawns cannot move
    * vertically if there is another piece in the way, and can only take other pieces if they are
