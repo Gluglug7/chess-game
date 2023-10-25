@@ -80,4 +80,14 @@ public class Bishop extends Piece {
     }
     return moves;
   }
+
+  /**
+   * Returns a copy of the bishop.
+   *
+   * @param newImage The image of the bishop.
+   * @return A copy of the bishop.
+   */
+  public Piece copy(ImageView newImage) {
+    return new Bishop(this.colour, newImage, this.xOrdinate, this.yOrdinate);
+  }
 }

@@ -79,4 +79,14 @@ public class Pawn extends Piece {
     }
     return moves;
   }
+
+  /**
+   * Returns a new pawn with the same colour and image as the original.
+   *
+   * @param image The image of the pawn.
+   * @return A new pawn with the same colour and image as the original.
+   */
+  public Piece copy(ImageView newImage) {
+    return new Pawn(this.colour, newImage, this.xOrdinate, this.yOrdinate);
+  }
 }

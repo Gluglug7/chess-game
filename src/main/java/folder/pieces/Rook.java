@@ -80,4 +80,14 @@ public class Rook extends Piece {
     }
     return moves;
   }
+
+  /**
+   * Returns a new rook with the same colour and image as the current rook.
+   *
+   * @param image The image of the new rook.
+   * @return A new rook with the same colour and image as the current rook.
+   */
+  public Piece copy(ImageView newImage) {
+    return new Rook(this.colour, newImage, this.xOrdinate, this.yOrdinate);
+  }
 }

@@ -16,6 +16,8 @@ public abstract class Piece {
 
   public abstract Set<int[]> moveSet(int xOrdinate, int yOrdinate, List<List<Piece>> board);
 
+  public abstract Piece copy(ImageView newImage);
+
   public void printPiece() {
     System.out.println(this.colour + " " + this.type);
   }
@@ -32,7 +34,11 @@ public abstract class Piece {
     return this.image;
   }
 
-  public void hasMoved() {
+  public boolean hasMoved() {
+    return this.hasMoved;
+  }
+
+  public void moved() {
     this.hasMoved = true;
   }
 

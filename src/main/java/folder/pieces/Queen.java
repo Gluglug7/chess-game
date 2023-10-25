@@ -133,4 +133,14 @@ public class Queen extends Piece {
     }
     return moves;
   }
+
+  /**
+   * Returns a copy of the queen.
+   *
+   * @param image The image of the queen.
+   * @return A copy of the queen.
+   */
+  public Piece copy(ImageView newImage) {
+    return new Queen(this.colour, newImage, this.xOrdinate, this.yOrdinate);
+  }
 }

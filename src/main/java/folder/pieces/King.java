@@ -63,4 +63,13 @@ public class King extends Piece {
     }
     return moves;
   }
+
+  /**
+   * Returns a copy of the king.
+   *
+   * @return A copy of the king.
+   */
+  public Piece copy(ImageView newImage) {
+    return new King(this.colour, newImage, this.xOrdinate, this.yOrdinate);
+  }
 }
