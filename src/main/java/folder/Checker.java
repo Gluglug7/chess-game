@@ -35,7 +35,7 @@ public class Checker {
 
     for (Piece piece :
         colour.equals("white") ? ChessController.blackPieces : ChessController.whitePieces) {
-      Set<int[]> potentialMoves = piece.moveSet(piece.getX(), piece.getY(), boardToCheck);
+      Set<int[]> potentialMoves = piece.moveSet(boardToCheck);
       if (potentialMoves == null) {
         continue;
       }
@@ -102,7 +102,7 @@ public class Checker {
         colour.equals("white") ? ChessController.whitePieces : ChessController.blackPieces) {
       if (piece.getType().equals("king")) {
         king = piece;
-        potentialMoves = king.moveSet(piece.getX(), piece.getY(), ChessController.board.getBoard());
+        potentialMoves = king.moveSet(ChessController.board.getBoard());
         break;
       }
     }
@@ -112,7 +112,7 @@ public class Checker {
 
     // If the king can move to a tile that is not attacked by the opposite colour, then no checkmate
     for (int[] move : potentialMoves) {
-      if (!attackedTiles.stream().anyMatch(nullMove -> Arrays.equals(nullMove, move))) {
+      if (attackedTiles.stream().noneMatch(nullMove -> Arrays.equals(nullMove, move))) {
         canMove = true;
         System.out.println(
             "No checkmate because the king can move out of check to " + move[0] + ", " + move[1]);
@@ -132,8 +132,7 @@ public class Checker {
   private boolean checkPathBlock(String colour) {
     for (Piece piece :
         colour.equals("white") ? ChessController.whitePieces : ChessController.blackPieces) {
-      Set<int[]> potentialMoves =
-          piece.moveSet(piece.getX(), piece.getY(), ChessController.board.getBoard());
+      Set<int[]> potentialMoves = piece.moveSet(ChessController.board.getBoard());
       if (piece.getType().equals("king") || potentialMoves == null || potentialMoves.isEmpty()) {
         continue;
       }
@@ -165,8 +164,7 @@ public class Checker {
     // Checks if any potential moves can take the checking piece away, thus removing the check
     for (Piece piece :
         colour.equals("white") ? ChessController.whitePieces : ChessController.blackPieces) {
-      Set<int[]> potentialMoves =
-          piece.moveSet(piece.getX(), piece.getY(), ChessController.board.getBoard());
+      Set<int[]> potentialMoves = piece.moveSet(ChessController.board.getBoard());
       if (potentialMoves == null || potentialMoves.isEmpty()) {
         continue;
       }
@@ -194,7 +192,7 @@ public class Checker {
     Set<int[]> attackedTiles = new HashSet<int[]>();
     for (Piece piece :
         colour.equals("white") ? ChessController.whitePieces : ChessController.blackPieces) {
-      Set<int[]> pieceMoves = piece.moveSet(piece.getX(), piece.getY(), boardToCheck);
+      Set<int[]> pieceMoves = piece.moveSet(boardToCheck);
       if (pieceMoves == null) {
         continue;
       }

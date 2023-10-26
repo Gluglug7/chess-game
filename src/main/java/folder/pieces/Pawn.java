@@ -21,11 +21,10 @@ public class Pawn extends Piece {
    * vertically if there is another piece in the way, and can only take other pieces if they are
    * diagonal to them.
    *
-   * @param xOrdinate The x ordinate of the pawn.
-   * @param yOrdinate The y ordinate of the pawn.
+   * @param board The board the pawn is on.
    * @return A set of all possible moves for a pawn at the given coordinates.
    */
-  public Set<int[]> moveSet(int xOrdinate, int yOrdinate, List<List<Piece>> board) {
+  public Set<int[]> moveSet(List<List<Piece>> board) {
     Set<int[]> moves = new HashSet<int[]>();
     if (this.colour.equals("white")) {
       if (yOrdinate - 1 >= 0 && board.get(yOrdinate - 1).get(xOrdinate).getType().equals("empty")) {

@@ -11,7 +11,7 @@ public class Empty extends Piece {
     this.type = "empty";
   }
 
-  public Set<int[]> moveSet(int xOrdinate, int yOrdinate, List<List<Piece>> board) {
+  public Set<int[]> moveSet(List<List<Piece>> board) {
     return null;
   }
 

@@ -14,7 +14,7 @@ public abstract class Piece {
   protected int xOrdinate;
   protected int yOrdinate;
 
-  public abstract Set<int[]> moveSet(int xOrdinate, int yOrdinate, List<List<Piece>> board);
+  public abstract Set<int[]> moveSet(List<List<Piece>> board);
 
   public abstract Piece copy(ImageView newImage);
 

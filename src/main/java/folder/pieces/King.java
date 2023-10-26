@@ -17,11 +17,10 @@ public class King extends Piece {
   /**
    * Returns a set of all possible moves for a king at a given position.
    *
-   * @param xOrdinate The x ordinate of the king.
-   * @param yOrdinate The y ordinate of the king.
+   * @param board The board the king is on.
    * @return A set of all possible moves for a king at a given position.
    */
-  public Set<int[]> moveSet(int xOrdinate, int yOrdinate, List<List<Piece>> board) {
+  public Set<int[]> moveSet(List<List<Piece>> board) {
     Set<int[]> moves = new HashSet<int[]>();
     // Handling adding all the single moves the king can make
     if (xOrdinate + 1 < 8

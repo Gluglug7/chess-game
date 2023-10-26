@@ -129,6 +129,7 @@ public class ChessController {
         turn = turn.equals("white") ? "black" : "white";
       }
     }
+    // Not else if statement because user may want to select another piece to move
     if (piece.getColour().equals(this.turn) && !piece.getType().equals("empty")) {
       select(xOrdinate, yOrdinate);
       pieceSelected = true;
@@ -198,8 +199,10 @@ public class ChessController {
     int xKingPlacement = xOrdinate == 6 ? 6 : 2;
     board.getBoard().get(yValue).set(xRookPlacement, rook);
     rook.moved();
+    rook.setX(xRookPlacement);
     board.getBoard().get(yValue).set(xKingPlacement, selectedPiece);
     selectedPiece.moved();
+    selectedPiece.setX(xKingPlacement);
     rook.getImage().setLayoutX(xRookPlacement * 50 + 100);
     selectedImage.setLayoutX(xKingPlacement * 50 + 100);
     board.getBoard().get(yValue).set(xValue, new Empty());
@@ -219,7 +222,7 @@ public class ChessController {
     selectedPiece = board.getBoard().get(yOrdinate).get(xOrdinate);
     selectedPos = new int[] {xOrdinate, yOrdinate};
     selectedImage = selectedPiece.getImage();
-    moves = selectedPiece.moveSet(xOrdinate, yOrdinate, board.getBoard());
+    moves = selectedPiece.moveSet(board.getBoard());
   }
 
   /**

@@ -17,11 +17,10 @@ public class Knight extends Piece {
   /**
    * Returns a set of all possible moves for a knight at the given coordinates.
    *
-   * @param xOrdinate The x ordinate of the knight.
-   * @param yOrdinate The y ordinate of the knight.
+   * @param board The board the knight is on.
    * @return A set of all possible moves for a knight at the given coordinates.
    */
-  public Set<int[]> moveSet(int xOrdinate, int yOrdinate, List<List<Piece>> board) {
+  public Set<int[]> moveSet(List<List<Piece>> board) {
     Set<int[]> moves = new HashSet<int[]>();
     // Handles all the possible L shape movements the knight can make
     if (xOrdinate + 2 < 8

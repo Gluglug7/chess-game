@@ -18,11 +18,10 @@ public class Rook extends Piece {
   /**
    * Returns a set of all possible moves for a rook at the given coordinates.
    *
-   * @param xOrdinate The x ordinate of the rook.
-   * @param yOrdinate The y ordinate of the rook.
+   * @param board The board the rook is on.
    * @return A set of all possible moves for a rook at the given coordinates.
    */
-  public Set<int[]> moveSet(int xOrdinate, int yOrdinate, List<List<Piece>> board) {
+  public Set<int[]> moveSet(List<List<Piece>> board) {
     Set<int[]> moves = new HashSet<int[]>();
     boolean north = true;
     boolean east = true;
