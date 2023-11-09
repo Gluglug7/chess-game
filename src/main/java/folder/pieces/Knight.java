@@ -6,9 +6,9 @@ import java.util.Set;
 import javafx.scene.image.ImageView;
 
 public class Knight extends Piece {
-  public Knight(String colour, ImageView image, int xOrdinate, int yOrdinate) {
+  public Knight(Colour colour, ImageView image, int xOrdinate, int yOrdinate) {
     this.colour = colour;
-    this.type = "knight";
+    this.type = Type.KNIGHT;
     this.image = image;
     this.xOrdinate = xOrdinate;
     this.yOrdinate = yOrdinate;

@@ -6,9 +6,9 @@ import java.util.Set;
 import javafx.scene.image.ImageView;
 
 public class Rook extends Piece {
-  public Rook(String colour, ImageView image, int xOrdinate, int yOrdinate) {
+  public Rook(Colour colour, ImageView image, int xOrdinate, int yOrdinate) {
     this.colour = colour;
-    this.type = "rook";
+    this.type = Type.ROOK;
     this.hasMoved = false;
     this.image = image;
     this.xOrdinate = xOrdinate;
@@ -31,7 +31,7 @@ public class Rook extends Piece {
     for (int i = 1; i < 8; i++) {
       // Handling rook moving upwards
       if (north && yOrdinate - i >= 0) {
-        if (board.get(yOrdinate - i).get(xOrdinate).getType().equals("empty")) {
+        if (board.get(yOrdinate - i).get(xOrdinate).getType().equals(Type.EMPTY)) {
           moves.add(new int[] {xOrdinate, yOrdinate - i});
         } else if (!board.get(yOrdinate - i).get(xOrdinate).getColour().equals(this.colour)
             || checkCheck) {
@@ -44,7 +44,7 @@ public class Rook extends Piece {
 
       // Handling rook moving right
       if (east && xOrdinate + i < 8) {
-        if (board.get(yOrdinate).get(xOrdinate + i).getType().equals("empty")) {
+        if (board.get(yOrdinate).get(xOrdinate + i).getType().equals(Type.EMPTY)) {
           moves.add(new int[] {xOrdinate + i, yOrdinate});
         } else if (!board.get(yOrdinate).get(xOrdinate + i).getColour().equals(this.colour)
             || checkCheck) {
@@ -57,7 +57,7 @@ public class Rook extends Piece {
 
       // Handling rook moving downwards
       if (south && yOrdinate + i < 8) {
-        if (board.get(yOrdinate + i).get(xOrdinate).getType().equals("empty")) {
+        if (board.get(yOrdinate + i).get(xOrdinate).getType().equals(Type.EMPTY)) {
           moves.add(new int[] {xOrdinate, yOrdinate + i});
         } else if (!board.get(yOrdinate + i).get(xOrdinate).getColour().equals(this.colour)
             || checkCheck) {
@@ -70,7 +70,7 @@ public class Rook extends Piece {
 
       // Handling rook moving left
       if (west && xOrdinate - i >= 0) {
-        if (board.get(yOrdinate).get(xOrdinate - i).getType().equals("empty")) {
+        if (board.get(yOrdinate).get(xOrdinate - i).getType().equals(Type.EMPTY)) {
           moves.add(new int[] {xOrdinate - i, yOrdinate});
         } else if (!board.get(yOrdinate).get(xOrdinate - i).getColour().equals(this.colour)
             || checkCheck) {

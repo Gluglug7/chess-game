@@ -2,6 +2,8 @@ package folder;
 
 import folder.pieces.Empty;
 import folder.pieces.Piece;
+import folder.pieces.Piece.Colour;
+import folder.pieces.Piece.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -26,15 +28,15 @@ public class Checker {
    * @param colour The colour of the king to check.
    * @param boardToCheck The board to check for a check.
    */
-  public int checkCheck(String colour, List<List<Piece>> boardToCheck) {
-    ImageView king = colour.equals("white") ? controller.wKing : controller.bKing;
+  public int checkCheck(Colour colour, List<List<Piece>> boardToCheck) {
+    ImageView king = colour.equals(Colour.WHITE) ? controller.wKing : controller.bKing;
     int kingX = (int) (king.getLayoutX() - 100) / 50;
     int kingY = (int) king.getLayoutY() / 50;
     checkingPieces.clear();
     int checkingNumber = 0;
 
     for (Piece piece :
-        colour.equals("white") ? ChessController.blackPieces : ChessController.whitePieces) {
+        colour.equals(Colour.WHITE) ? ChessController.blackPieces : ChessController.whitePieces) {
       Set<int[]> potentialMoves = piece.moveSet(boardToCheck, false);
       if (potentialMoves == null) {
         continue;
@@ -57,7 +59,7 @@ public class Checker {
    * @param colour
    * @return
    */
-  public boolean checkCheckMate(String colour) {
+  public boolean checkCheckMate(Colour colour) {
     boolean checkmate = false;
     if (checkingPieces.size() > 1) {
       checkmate = checkKingMoves(colour);
@@ -70,9 +72,9 @@ public class Checker {
       // If the king cannot move and no pieces can take the checking piece, then if the piece's path
       // can be blocked it will not be a checkmate
       Piece checkingPiece = checkingPieces.get(0);
-      if (checkingPiece.getType().equals("rook")
-          || checkingPiece.getType().equals("bishop")
-          || checkingPiece.getType().equals("queen")) {
+      if (checkingPiece.getType().equals(Type.ROOK)
+          || checkingPiece.getType().equals(Type.BISHOP)
+          || checkingPiece.getType().equals(Type.QUEEN)) {
         checkmate = checkPathBlock(colour);
       } else {
         // If the checking piece is not a rook, bishop, or queen, then it's path cannot be blocked,
@@ -92,15 +94,15 @@ public class Checker {
    * @param colour The colour of the king to check.
    * @return Whether the king can move out of check or not.
    */
-  private boolean checkKingMoves(String colour) {
+  private boolean checkKingMoves(Colour colour) {
     Piece king = null;
     Set<int[]> potentialMoves = null;
     boolean canMove = false;
 
     // Finding the king of the given colour colour
     for (Piece piece :
-        colour.equals("white") ? ChessController.whitePieces : ChessController.blackPieces) {
-      if (piece.getType().equals("king")) {
+        colour.equals(Colour.WHITE) ? ChessController.whitePieces : ChessController.blackPieces) {
+      if (piece.getType().equals(Type.KING)) {
         king = piece;
         potentialMoves = king.moveSet(ChessController.board.getBoard(), false);
         break;
@@ -133,11 +135,11 @@ public class Checker {
    * @param colour The colour of the king in check.
    * @return Whether the checking piece's path can be blocked.
    */
-  private boolean checkPathBlock(String colour) {
+  private boolean checkPathBlock(Colour colour) {
     for (Piece piece :
-        colour.equals("white") ? ChessController.whitePieces : ChessController.blackPieces) {
+        colour.equals(Colour.WHITE) ? ChessController.whitePieces : ChessController.blackPieces) {
       Set<int[]> potentialMoves = piece.moveSet(ChessController.board.getBoard(), false);
-      if (piece.getType().equals("king") || potentialMoves == null || potentialMoves.isEmpty()) {
+      if (piece.getType().equals(Type.KING) || potentialMoves == null || potentialMoves.isEmpty()) {
         continue;
       }
       // Uses a simulation to check for check if a piece's path is blocked.
@@ -161,13 +163,13 @@ public class Checker {
    * @param colour The colour of the king to check.
    * @return Whether the checking piece can be taken or not.
    */
-  private boolean checkTakePiece(String colour) {
+  private boolean checkTakePiece(Colour colour) {
     int checkingX = checkingPieces.get(0).getX();
     int checkingY = checkingPieces.get(0).getY();
 
     // Checks if any potential moves can take the checking piece away, thus removing the check
     for (Piece piece :
-        colour.equals("white") ? ChessController.whitePieces : ChessController.blackPieces) {
+        colour.equals(Colour.WHITE) ? ChessController.whitePieces : ChessController.blackPieces) {
       Set<int[]> potentialMoves = piece.moveSet(ChessController.board.getBoard(), false);
       if (potentialMoves == null || potentialMoves.isEmpty()) {
         continue;
@@ -175,7 +177,7 @@ public class Checker {
 
       // Can't take the checking piece if the piece that can take it is the king and it will move
       // into check
-      if (piece.getType().equals("king")
+      if (piece.getType().equals(Type.KING)
           && findAttackedTiles(colour, ChessController.board.getBoard()).stream()
               .anyMatch(c -> Arrays.equals(c, new int[] {checkingX, checkingY}))) {
         continue;
@@ -201,10 +203,10 @@ public class Checker {
    * @param boardToCheck The board to check.
    * @return The set of attacked tiles.
    */
-  public Set<int[]> findAttackedTiles(String colour, List<List<Piece>> boardToCheck) {
+  public Set<int[]> findAttackedTiles(Colour colour, List<List<Piece>> boardToCheck) {
     Set<int[]> attackedTiles = new HashSet<int[]>();
     for (Piece piece :
-        colour.equals("white") ? ChessController.blackPieces : ChessController.whitePieces) {
+        colour.equals(Colour.WHITE) ? ChessController.blackPieces : ChessController.whitePieces) {
       Set<int[]> pieceMoves = piece.moveSet(boardToCheck, true);
       if (pieceMoves == null) {
         continue;

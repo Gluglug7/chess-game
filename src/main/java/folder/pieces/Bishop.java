@@ -6,9 +6,9 @@ import java.util.Set;
 import javafx.scene.image.ImageView;
 
 public class Bishop extends Piece {
-  public Bishop(String colour, ImageView image, int xOrdinate, int yOrdinate) {
+  public Bishop(Colour colour, ImageView image, int xOrdinate, int yOrdinate) {
     this.colour = colour;
-    this.type = "bishop";
+    this.type = Type.BISHOP;
     this.image = image;
     this.xOrdinate = xOrdinate;
     this.yOrdinate = yOrdinate;
@@ -31,7 +31,7 @@ public class Bishop extends Piece {
     for (int i = 1; i < 8; i++) {
       // Handling bishop moving diagonally upwards and right
       if (northEast && xOrdinate + i < 8 && yOrdinate - i >= 0) {
-        if (board.get(yOrdinate - i).get(xOrdinate + i).getType().equals("empty")) {
+        if (board.get(yOrdinate - i).get(xOrdinate + i).getType().equals(Type.EMPTY)) {
           moves.add(new int[] {xOrdinate + i, yOrdinate - i});
         } else if (!board.get(yOrdinate - i).get(xOrdinate + i).getColour().equals(this.colour)
             || checkCheck) {
@@ -44,7 +44,7 @@ public class Bishop extends Piece {
 
       // Handling bishop moving diagonally downwards and right
       if (southEast && xOrdinate + i < 8 && yOrdinate + i < 8) {
-        if (board.get(yOrdinate + i).get(xOrdinate + i).getType().equals("empty")) {
+        if (board.get(yOrdinate + i).get(xOrdinate + i).getType().equals(Type.EMPTY)) {
           moves.add(new int[] {xOrdinate + i, yOrdinate + i});
         } else if (!board.get(yOrdinate + i).get(xOrdinate + i).getColour().equals(this.colour)
             || checkCheck) {
@@ -57,7 +57,7 @@ public class Bishop extends Piece {
 
       // Handling bishop moving diagonally downwards and left
       if (southWest && xOrdinate - i >= 0 && yOrdinate + i < 8) {
-        if (board.get(yOrdinate + i).get(xOrdinate - i).getType().equals("empty")) {
+        if (board.get(yOrdinate + i).get(xOrdinate - i).getType().equals(Type.EMPTY)) {
           moves.add(new int[] {xOrdinate - i, yOrdinate + i});
         } else if (!board.get(yOrdinate + i).get(xOrdinate - i).getColour().equals(this.colour)
             || checkCheck) {
@@ -70,7 +70,7 @@ public class Bishop extends Piece {
 
       // Handling bishop moving diagonally upwards and left
       if (northWest && xOrdinate - i >= 0 && yOrdinate - i >= 0) {
-        if (board.get(yOrdinate - i).get(xOrdinate - i).getType().equals("empty")) {
+        if (board.get(yOrdinate - i).get(xOrdinate - i).getType().equals(Type.EMPTY)) {
           moves.add(new int[] {xOrdinate - i, yOrdinate - i});
         } else if (!board.get(yOrdinate - i).get(xOrdinate - i).getColour().equals(this.colour)
             || checkCheck) {

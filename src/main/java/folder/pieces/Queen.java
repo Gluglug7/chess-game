@@ -9,9 +9,9 @@ public class Queen extends Piece {
   private Bishop queenBishop;
   private Rook queenRook;
 
-  public Queen(String colour, ImageView image, int xOrdinate, int yOrdinate) {
+  public Queen(Colour colour, ImageView image, int xOrdinate, int yOrdinate) {
     this.colour = colour;
-    this.type = "queen";
+    this.type = Type.QUEEN;
     this.image = image;
     this.xOrdinate = xOrdinate;
     this.yOrdinate = yOrdinate;

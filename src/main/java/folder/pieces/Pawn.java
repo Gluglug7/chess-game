@@ -6,9 +6,9 @@ import java.util.Set;
 import javafx.scene.image.ImageView;
 
 public class Pawn extends Piece {
-  public Pawn(String colour, ImageView image, int xOrdinate, int yOrdinate) {
+  public Pawn(Colour colour, ImageView image, int xOrdinate, int yOrdinate) {
     this.colour = colour;
-    this.type = "pawn";
+    this.type = Type.PAWN;
     this.hasMoved = false;
     this.image = image;
     this.xOrdinate = xOrdinate;
@@ -26,14 +26,15 @@ public class Pawn extends Piece {
    */
   public Set<int[]> moveSet(List<List<Piece>> board, boolean checkCheck) {
     Set<int[]> moves = new HashSet<int[]>();
-    if (this.colour.equals("white")) {
-      if (yOrdinate - 1 >= 0 && board.get(yOrdinate - 1).get(xOrdinate).getType().equals("empty")) {
+    if (this.colour.equals(Colour.WHITE)) {
+      if (yOrdinate - 1 >= 0
+          && board.get(yOrdinate - 1).get(xOrdinate).getType().equals(Type.EMPTY)) {
         moves.add(new int[] {xOrdinate, yOrdinate - 1});
       }
       // Case for initially moving two spaces
       if (!hasMoved
           && yOrdinate - 2 >= 0
-          && board.get(yOrdinate - 2).get(xOrdinate).getType().equals("empty")) {
+          && board.get(yOrdinate - 2).get(xOrdinate).getType().equals(Type.EMPTY)) {
         moves.add(new int[] {xOrdinate, yOrdinate - 2});
       }
 
@@ -42,7 +43,7 @@ public class Pawn extends Piece {
           && yOrdinate - 1 >= 0
           && (!board.get(yOrdinate - 1).get(xOrdinate + 1).getColour().equals(this.colour)
               || checkCheck)
-          && !board.get(yOrdinate - 1).get(xOrdinate + 1).getType().equals("empty")) {
+          && !board.get(yOrdinate - 1).get(xOrdinate + 1).getType().equals(Type.EMPTY)) {
         moves.add(new int[] {xOrdinate + 1, yOrdinate - 1});
       }
       // Cases for taking a piece to the diagonal
@@ -50,17 +51,18 @@ public class Pawn extends Piece {
           && yOrdinate - 1 >= 0
           && (!board.get(yOrdinate - 1).get(xOrdinate - 1).getColour().equals(this.colour)
               || checkCheck)
-          && !board.get(yOrdinate - 1).get(xOrdinate - 1).getType().equals("empty")) {
+          && !board.get(yOrdinate - 1).get(xOrdinate - 1).getType().equals(Type.EMPTY)) {
         moves.add(new int[] {xOrdinate - 1, yOrdinate - 1});
       }
     } else {
-      if (yOrdinate + 1 < 8 && board.get(yOrdinate + 1).get(xOrdinate).getType().equals("empty")) {
+      if (yOrdinate + 1 < 8
+          && board.get(yOrdinate + 1).get(xOrdinate).getType().equals(Type.EMPTY)) {
         moves.add(new int[] {xOrdinate, yOrdinate + 1});
       }
       // Case for initially moving two spaces
       if (!hasMoved
           && yOrdinate + 2 < 8
-          && board.get(yOrdinate + 2).get(xOrdinate).getType().equals("empty")) {
+          && board.get(yOrdinate + 2).get(xOrdinate).getType().equals(Type.EMPTY)) {
         moves.add(new int[] {xOrdinate, yOrdinate + 2});
       }
 
@@ -69,7 +71,7 @@ public class Pawn extends Piece {
           && yOrdinate + 1 < 8
           && (!board.get(yOrdinate + 1).get(xOrdinate + 1).getColour().equals(this.colour)
               || checkCheck)
-          && !board.get(yOrdinate + 1).get(xOrdinate + 1).getType().equals("empty")) {
+          && !board.get(yOrdinate + 1).get(xOrdinate + 1).getType().equals(Type.EMPTY)) {
         moves.add(new int[] {xOrdinate + 1, yOrdinate + 1});
       }
       // Cases for taking a piece to the diagonal
@@ -77,7 +79,7 @@ public class Pawn extends Piece {
           && yOrdinate + 1 < 8
           && (!board.get(yOrdinate + 1).get(xOrdinate - 1).getColour().equals(this.colour)
               || checkCheck)
-          && !board.get(yOrdinate + 1).get(xOrdinate - 1).getType().equals("empty")) {
+          && !board.get(yOrdinate + 1).get(xOrdinate - 1).getType().equals(Type.EMPTY)) {
         moves.add(new int[] {xOrdinate - 1, yOrdinate + 1});
       }
     }

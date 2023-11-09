@@ -6,8 +6,26 @@ import javafx.scene.image.ImageView;
 
 /** Class to represent everything that can occupy a tile on the board. */
 public abstract class Piece {
-  protected String colour;
-  protected String type;
+  /** Enum to represent the colour of a piece. */
+  public enum Colour {
+    WHITE,
+    BLACK,
+    EMPTY
+  }
+
+  /** Enum to represent the type of a piece. */
+  public enum Type {
+    PAWN,
+    ROOK,
+    KNIGHT,
+    BISHOP,
+    QUEEN,
+    KING,
+    EMPTY
+  }
+
+  protected Colour colour;
+  protected Type type;
   protected boolean hasMoved;
   protected ImageView image;
 
@@ -22,11 +40,11 @@ public abstract class Piece {
     System.out.println(this.colour + " " + this.type);
   }
 
-  public String getType() {
+  public Type getType() {
     return this.type;
   }
 
-  public String getColour() {
+  public Colour getColour() {
     return this.colour;
   }
 

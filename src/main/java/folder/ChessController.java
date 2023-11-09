@@ -2,6 +2,8 @@ package folder;
 
 import folder.pieces.Empty;
 import folder.pieces.Piece;
+import folder.pieces.Piece.Colour;
+import folder.pieces.Piece.Type;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -62,7 +64,7 @@ public class ChessController {
   public Piece selectedPiece;
   public ImageView selectedImage;
   public int[] selectedPos;
-  public String turn;
+  public Colour turn;
 
   /** Method called when the program is started. Initialises the board and the pieces. */
   public void initialize() {
@@ -82,7 +84,7 @@ public class ChessController {
       blackPieces.add(board.getBoard().get(1).get(i));
     }
     pieceSelected = false;
-    turn = "white";
+    turn = Colour.WHITE;
   }
 
   // TODO: Prevent pieces from moving in check
@@ -100,10 +102,10 @@ public class ChessController {
 
     Piece piece = board.getBoard().get(yOrdinate).get(xOrdinate);
     if (pieceSelected) {
-      if (selectedPiece.getType().equals("king")) {
+      if (selectedPiece.getType().equals(Type.KING)) {
         if (castle(xOrdinate, yOrdinate)) {
           pieceSelected = false;
-          turn = turn.equals("white") ? "black" : "white";
+          turn = turn.equals(Colour.WHITE) ? Colour.BLACK : Colour.WHITE;
           System.out.println("Castle");
           printTurnDetails(piece, xOrdinate, yOrdinate);
           return;
@@ -114,9 +116,9 @@ public class ChessController {
         // Removing the piece from the board if taken
         // Could include a remove method for each piece that moves it to a position to the side of
         // the boards
-        if (!piece.getType().equals("empty")) {
+        if (!piece.getType().equals(Type.EMPTY)) {
           piece.getImage().setLayoutX(-50);
-          if (piece.getColour().equals("white")) {
+          if (piece.getColour().equals(Colour.WHITE)) {
             whitePieces.remove(piece);
             whiteTakenPieces.add(piece);
           } else {
@@ -126,11 +128,11 @@ public class ChessController {
         }
         move(xOrdinate, yOrdinate);
         pieceSelected = false;
-        turn = turn.equals("white") ? "black" : "white";
+        turn = turn.equals(Colour.WHITE) ? Colour.BLACK : Colour.WHITE;
       }
     }
     // Not else if statement because user may want to select another piece to move
-    if (piece.getColour().equals(this.turn) && !piece.getType().equals("empty")) {
+    if (piece.getColour().equals(this.turn) && !piece.getType().equals(Type.EMPTY)) {
       select(xOrdinate, yOrdinate);
       pieceSelected = true;
     }
@@ -165,30 +167,30 @@ public class ChessController {
    */
   private boolean castle(int xOrdinate, int yOrdinate) {
     // Cannot castle if the king has moved
-    if (!selectedPiece.getType().equals("king") || selectedPiece.hasMoved()) {
+    if (!selectedPiece.getType().equals(Type.KING) || selectedPiece.hasMoved()) {
       return false;
     }
 
-    String colour = selectedPiece.getColour();
-    int yValue = colour.equals("white") ? 7 : 0;
+    Colour colour = selectedPiece.getColour();
+    int yValue = colour.equals(Colour.WHITE) ? 7 : 0;
     int xValue = xOrdinate == 6 ? 7 : 0;
 
     // Piece on that tile must be a rook and must not have moved
     Piece rook = board.getBoard().get(yValue).get(xValue);
-    if (!rook.getType().equals("rook") || rook.hasMoved()) {
+    if (!rook.getType().equals(Type.ROOK) || rook.hasMoved()) {
       return false;
     }
 
     // If there are tiles that are not empty between the two casting pieces, then cannot castle
     if (selectedPiece.getX() < xValue) {
       for (int i = 5; i < 7; i++) {
-        if (!board.getBoard().get(yValue).get(i).getType().equals("empty")) {
+        if (!board.getBoard().get(yValue).get(i).getType().equals(Type.EMPTY)) {
           return false;
         }
       }
     } else if (selectedPiece.getX() > xValue) {
       for (int i = 1; i < 4; i++) {
-        if (!board.getBoard().get(yValue).get(i).getType().equals("empty")) {
+        if (!board.getBoard().get(yValue).get(i).getType().equals(Type.EMPTY)) {
           return false;
         }
       }
@@ -249,17 +251,17 @@ public class ChessController {
    * Method to check whether either side is in check. Calls the checkCheck method for both sides.
    */
   private void checkAllChecks() {
-    if (checker.checkCheck("white", board.getBoard()) > 0) {
+    if (checker.checkCheck(Colour.WHITE, board.getBoard()) > 0) {
       GameState.check = true;
       System.out.println("White is in check");
-      if (checker.checkCheckMate("white")) {
+      if (checker.checkCheckMate(Colour.WHITE)) {
         GameState.checkMate = true;
         System.out.println("White is in checkmate");
       }
-    } else if (checker.checkCheck("black", board.getBoard()) > 0) {
+    } else if (checker.checkCheck(Colour.BLACK, board.getBoard()) > 0) {
       GameState.check = true;
       System.out.println("Black is in check");
-      if (checker.checkCheckMate("black")) {
+      if (checker.checkCheckMate(Colour.BLACK)) {
         GameState.checkMate = true;
         System.out.println("Black is in checkmate");
       }
