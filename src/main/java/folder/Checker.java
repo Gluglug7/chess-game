@@ -35,7 +35,7 @@ public class Checker {
 
     for (Piece piece :
         colour.equals("white") ? ChessController.blackPieces : ChessController.whitePieces) {
-      Set<int[]> potentialMoves = piece.moveSet(boardToCheck);
+      Set<int[]> potentialMoves = piece.moveSet(boardToCheck, false);
       if (potentialMoves == null) {
         continue;
       }
@@ -102,13 +102,17 @@ public class Checker {
         colour.equals("white") ? ChessController.whitePieces : ChessController.blackPieces) {
       if (piece.getType().equals("king")) {
         king = piece;
-        potentialMoves = king.moveSet(ChessController.board.getBoard());
+        potentialMoves = king.moveSet(ChessController.board.getBoard(), false);
         break;
       }
     }
 
+    // Using a clone of the board without the king to find all tiles that would potentially be
+    // attacked
+    List<List<Piece>> boardClone = ChessController.board.cloneBoard();
+    boardClone.get(king.getY()).set(king.getX(), new Empty());
     // Findind all the tiles that are being attacked by the opposite colour
-    Set<int[]> attackedTiles = findAttackedTiles(colour, ChessController.board.getBoard());
+    Set<int[]> attackedTiles = findAttackedTiles(colour, boardClone);
 
     // If the king can move to a tile that is not attacked by the opposite colour, then no checkmate
     for (int[] move : potentialMoves) {
@@ -132,7 +136,7 @@ public class Checker {
   private boolean checkPathBlock(String colour) {
     for (Piece piece :
         colour.equals("white") ? ChessController.whitePieces : ChessController.blackPieces) {
-      Set<int[]> potentialMoves = piece.moveSet(ChessController.board.getBoard());
+      Set<int[]> potentialMoves = piece.moveSet(ChessController.board.getBoard(), false);
       if (piece.getType().equals("king") || potentialMoves == null || potentialMoves.isEmpty()) {
         continue;
       }
@@ -164,10 +168,19 @@ public class Checker {
     // Checks if any potential moves can take the checking piece away, thus removing the check
     for (Piece piece :
         colour.equals("white") ? ChessController.whitePieces : ChessController.blackPieces) {
-      Set<int[]> potentialMoves = piece.moveSet(ChessController.board.getBoard());
+      Set<int[]> potentialMoves = piece.moveSet(ChessController.board.getBoard(), false);
       if (potentialMoves == null || potentialMoves.isEmpty()) {
         continue;
       }
+
+      // Can't take the checking piece if the piece that can take it is the king and it will move
+      // into check
+      if (piece.getType().equals("king")
+          && findAttackedTiles(colour, ChessController.board.getBoard()).stream()
+              .anyMatch(c -> Arrays.equals(c, new int[] {checkingX, checkingY}))) {
+        continue;
+      }
+
       // If there is a single piece attacking the king and it can be taken, then no checkmate
       if (potentialMoves.stream()
           .anyMatch(c -> Arrays.equals(c, new int[] {checkingX, checkingY}))) {
@@ -191,8 +204,8 @@ public class Checker {
   public Set<int[]> findAttackedTiles(String colour, List<List<Piece>> boardToCheck) {
     Set<int[]> attackedTiles = new HashSet<int[]>();
     for (Piece piece :
-        colour.equals("white") ? ChessController.whitePieces : ChessController.blackPieces) {
-      Set<int[]> pieceMoves = piece.moveSet(boardToCheck);
+        colour.equals("white") ? ChessController.blackPieces : ChessController.whitePieces) {
+      Set<int[]> pieceMoves = piece.moveSet(boardToCheck, true);
       if (pieceMoves == null) {
         continue;
       }

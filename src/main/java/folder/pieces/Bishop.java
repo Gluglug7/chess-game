@@ -20,7 +20,7 @@ public class Bishop extends Piece {
    * @param board The board the bishop is on.
    * @return A set of all possible moves for a bishop at a given position.
    */
-  public Set<int[]> moveSet(List<List<Piece>> board) {
+  public Set<int[]> moveSet(List<List<Piece>> board, boolean checkCheck) {
     Set<int[]> moves = new HashSet<int[]>();
 
     boolean northEast = true;
@@ -33,7 +33,8 @@ public class Bishop extends Piece {
       if (northEast && xOrdinate + i < 8 && yOrdinate - i >= 0) {
         if (board.get(yOrdinate - i).get(xOrdinate + i).getType().equals("empty")) {
           moves.add(new int[] {xOrdinate + i, yOrdinate - i});
-        } else if (!board.get(yOrdinate - i).get(xOrdinate + i).getColour().equals(this.colour)) {
+        } else if (!board.get(yOrdinate - i).get(xOrdinate + i).getColour().equals(this.colour)
+            || checkCheck) {
           moves.add(new int[] {xOrdinate + i, yOrdinate - i});
           northEast = false;
         } else {
@@ -45,7 +46,8 @@ public class Bishop extends Piece {
       if (southEast && xOrdinate + i < 8 && yOrdinate + i < 8) {
         if (board.get(yOrdinate + i).get(xOrdinate + i).getType().equals("empty")) {
           moves.add(new int[] {xOrdinate + i, yOrdinate + i});
-        } else if (!board.get(yOrdinate + i).get(xOrdinate + i).getColour().equals(this.colour)) {
+        } else if (!board.get(yOrdinate + i).get(xOrdinate + i).getColour().equals(this.colour)
+            || checkCheck) {
           moves.add(new int[] {xOrdinate + i, yOrdinate + i});
           southEast = false;
         } else {
@@ -57,7 +59,8 @@ public class Bishop extends Piece {
       if (southWest && xOrdinate - i >= 0 && yOrdinate + i < 8) {
         if (board.get(yOrdinate + i).get(xOrdinate - i).getType().equals("empty")) {
           moves.add(new int[] {xOrdinate - i, yOrdinate + i});
-        } else if (!board.get(yOrdinate + i).get(xOrdinate - i).getColour().equals(this.colour)) {
+        } else if (!board.get(yOrdinate + i).get(xOrdinate - i).getColour().equals(this.colour)
+            || checkCheck) {
           moves.add(new int[] {xOrdinate - i, yOrdinate + i});
           southWest = false;
         } else {
@@ -69,7 +72,8 @@ public class Bishop extends Piece {
       if (northWest && xOrdinate - i >= 0 && yOrdinate - i >= 0) {
         if (board.get(yOrdinate - i).get(xOrdinate - i).getType().equals("empty")) {
           moves.add(new int[] {xOrdinate - i, yOrdinate - i});
-        } else if (!board.get(yOrdinate - i).get(xOrdinate - i).getColour().equals(this.colour)) {
+        } else if (!board.get(yOrdinate - i).get(xOrdinate - i).getColour().equals(this.colour)
+            || checkCheck) {
           moves.add(new int[] {xOrdinate - i, yOrdinate - i});
           northWest = false;
         } else {

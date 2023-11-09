@@ -85,7 +85,7 @@ public class ChessController {
     turn = "white";
   }
 
-  // TODO: Prevent pieces from moving moving in check
+  // TODO: Prevent pieces from moving in check
   /**
    * Method called when a tile is clicked. Finds the position of the tile clicked and performs the
    * approriate action.
@@ -138,7 +138,6 @@ public class ChessController {
     printTurnDetails(piece, xOrdinate, yOrdinate);
   }
 
-  // TODO: Don't allow pieces to move into check or allow certain pieces to move if in check
   /**
    * Method called when moving a piece. Sets the selected piece to an empty tile and the tile at the
    * given coordinates to the selected piece.
@@ -222,7 +221,7 @@ public class ChessController {
     selectedPiece = board.getBoard().get(yOrdinate).get(xOrdinate);
     selectedPos = new int[] {xOrdinate, yOrdinate};
     selectedImage = selectedPiece.getImage();
-    moves = selectedPiece.moveSet(board.getBoard());
+    moves = selectedPiece.moveSet(board.getBoard(), false);
   }
 
   /**

@@ -20,7 +20,7 @@ public class King extends Piece {
    * @param board The board the king is on.
    * @return A set of all possible moves for a king at a given position.
    */
-  public Set<int[]> moveSet(List<List<Piece>> board) {
+  public Set<int[]> moveSet(List<List<Piece>> board, boolean checkCheck) {
     Set<int[]> moves = new HashSet<int[]>();
     // Handling adding all the single moves the king can make
     if (xOrdinate + 1 < 8

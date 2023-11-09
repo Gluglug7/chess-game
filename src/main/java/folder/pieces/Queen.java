@@ -27,14 +27,14 @@ public class Queen extends Piece {
    * @param board The board the queen is on.
    * @return A set of all possible moves for a queen at a given position.
    */
-  public Set<int[]> moveSet(List<List<Piece>> board) {
+  public Set<int[]> moveSet(List<List<Piece>> board, boolean checkCheck) {
     Set<int[]> moves = new HashSet<int[]>();
     queenBishop.setX(this.xOrdinate);
     queenBishop.setY(this.yOrdinate);
     queenRook.setX(this.xOrdinate);
     queenRook.setY(this.yOrdinate);
-    moves.addAll(queenBishop.moveSet(board));
-    moves.addAll(queenRook.moveSet(board));
+    moves.addAll(queenBishop.moveSet(board, checkCheck));
+    moves.addAll(queenRook.moveSet(board, checkCheck));
     return moves;
   }
 

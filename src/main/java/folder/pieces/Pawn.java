@@ -24,7 +24,7 @@ public class Pawn extends Piece {
    * @param board The board the pawn is on.
    * @return A set of all possible moves for a pawn at the given coordinates.
    */
-  public Set<int[]> moveSet(List<List<Piece>> board) {
+  public Set<int[]> moveSet(List<List<Piece>> board, boolean checkCheck) {
     Set<int[]> moves = new HashSet<int[]>();
     if (this.colour.equals("white")) {
       if (yOrdinate - 1 >= 0 && board.get(yOrdinate - 1).get(xOrdinate).getType().equals("empty")) {
@@ -40,14 +40,16 @@ public class Pawn extends Piece {
       // Cases for taking a piece to the diagonal
       if (xOrdinate + 1 < 8
           && yOrdinate - 1 >= 0
-          && !board.get(yOrdinate - 1).get(xOrdinate + 1).getColour().equals(this.colour)
+          && (!board.get(yOrdinate - 1).get(xOrdinate + 1).getColour().equals(this.colour)
+              || checkCheck)
           && !board.get(yOrdinate - 1).get(xOrdinate + 1).getType().equals("empty")) {
         moves.add(new int[] {xOrdinate + 1, yOrdinate - 1});
       }
       // Cases for taking a piece to the diagonal
       if (xOrdinate - 1 >= 0
           && yOrdinate - 1 >= 0
-          && !board.get(yOrdinate - 1).get(xOrdinate - 1).getColour().equals(this.colour)
+          && (!board.get(yOrdinate - 1).get(xOrdinate - 1).getColour().equals(this.colour)
+              || checkCheck)
           && !board.get(yOrdinate - 1).get(xOrdinate - 1).getType().equals("empty")) {
         moves.add(new int[] {xOrdinate - 1, yOrdinate - 1});
       }
@@ -65,14 +67,16 @@ public class Pawn extends Piece {
       // Cases for taking a piece to the diagonal
       if (xOrdinate + 1 < 8
           && yOrdinate + 1 < 8
-          && !board.get(yOrdinate + 1).get(xOrdinate + 1).getColour().equals(this.colour)
+          && (!board.get(yOrdinate + 1).get(xOrdinate + 1).getColour().equals(this.colour)
+              || checkCheck)
           && !board.get(yOrdinate + 1).get(xOrdinate + 1).getType().equals("empty")) {
         moves.add(new int[] {xOrdinate + 1, yOrdinate + 1});
       }
       // Cases for taking a piece to the diagonal
       if (xOrdinate - 1 >= 0
           && yOrdinate + 1 < 8
-          && !board.get(yOrdinate + 1).get(xOrdinate - 1).getColour().equals(this.colour)
+          && (!board.get(yOrdinate + 1).get(xOrdinate - 1).getColour().equals(this.colour)
+              || checkCheck)
           && !board.get(yOrdinate + 1).get(xOrdinate - 1).getType().equals("empty")) {
         moves.add(new int[] {xOrdinate - 1, yOrdinate + 1});
       }

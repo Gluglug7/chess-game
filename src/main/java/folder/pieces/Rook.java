@@ -21,7 +21,7 @@ public class Rook extends Piece {
    * @param board The board the rook is on.
    * @return A set of all possible moves for a rook at the given coordinates.
    */
-  public Set<int[]> moveSet(List<List<Piece>> board) {
+  public Set<int[]> moveSet(List<List<Piece>> board, boolean checkCheck) {
     Set<int[]> moves = new HashSet<int[]>();
     boolean north = true;
     boolean east = true;
@@ -33,7 +33,8 @@ public class Rook extends Piece {
       if (north && yOrdinate - i >= 0) {
         if (board.get(yOrdinate - i).get(xOrdinate).getType().equals("empty")) {
           moves.add(new int[] {xOrdinate, yOrdinate - i});
-        } else if (!board.get(yOrdinate - i).get(xOrdinate).getColour().equals(this.colour)) {
+        } else if (!board.get(yOrdinate - i).get(xOrdinate).getColour().equals(this.colour)
+            || checkCheck) {
           moves.add(new int[] {xOrdinate, yOrdinate - i});
           north = false;
         } else {
@@ -45,7 +46,8 @@ public class Rook extends Piece {
       if (east && xOrdinate + i < 8) {
         if (board.get(yOrdinate).get(xOrdinate + i).getType().equals("empty")) {
           moves.add(new int[] {xOrdinate + i, yOrdinate});
-        } else if (!board.get(yOrdinate).get(xOrdinate + i).getColour().equals(this.colour)) {
+        } else if (!board.get(yOrdinate).get(xOrdinate + i).getColour().equals(this.colour)
+            || checkCheck) {
           moves.add(new int[] {xOrdinate + i, yOrdinate});
           east = false;
         } else {
@@ -57,7 +59,8 @@ public class Rook extends Piece {
       if (south && yOrdinate + i < 8) {
         if (board.get(yOrdinate + i).get(xOrdinate).getType().equals("empty")) {
           moves.add(new int[] {xOrdinate, yOrdinate + i});
-        } else if (!board.get(yOrdinate + i).get(xOrdinate).getColour().equals(this.colour)) {
+        } else if (!board.get(yOrdinate + i).get(xOrdinate).getColour().equals(this.colour)
+            || checkCheck) {
           moves.add(new int[] {xOrdinate, yOrdinate + i});
           south = false;
         } else {
@@ -69,7 +72,8 @@ public class Rook extends Piece {
       if (west && xOrdinate - i >= 0) {
         if (board.get(yOrdinate).get(xOrdinate - i).getType().equals("empty")) {
           moves.add(new int[] {xOrdinate - i, yOrdinate});
-        } else if (!board.get(yOrdinate).get(xOrdinate - i).getColour().equals(this.colour)) {
+        } else if (!board.get(yOrdinate).get(xOrdinate - i).getColour().equals(this.colour)
+            || checkCheck) {
           moves.add(new int[] {xOrdinate - i, yOrdinate});
           west = false;
         } else {

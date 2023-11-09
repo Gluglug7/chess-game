@@ -20,47 +20,55 @@ public class Knight extends Piece {
    * @param board The board the knight is on.
    * @return A set of all possible moves for a knight at the given coordinates.
    */
-  public Set<int[]> moveSet(List<List<Piece>> board) {
+  public Set<int[]> moveSet(List<List<Piece>> board, boolean checkCheck) {
     Set<int[]> moves = new HashSet<int[]>();
     // Handles all the possible L shape movements the knight can make
     if (xOrdinate + 2 < 8
         && yOrdinate + 1 < 8
-        && !board.get(yOrdinate + 1).get(xOrdinate + 2).getColour().equals(this.colour)) {
+        && (!board.get(yOrdinate + 1).get(xOrdinate + 2).getColour().equals(this.colour)
+            || checkCheck)) {
       moves.add(new int[] {xOrdinate + 2, yOrdinate + 1});
     }
     if (xOrdinate + 2 < 8
         && yOrdinate - 1 >= 0
-        && !board.get(yOrdinate - 1).get(xOrdinate + 2).getColour().equals(this.colour)) {
+        && (!board.get(yOrdinate - 1).get(xOrdinate + 2).getColour().equals(this.colour)
+            || checkCheck)) {
       moves.add(new int[] {xOrdinate + 2, yOrdinate - 1});
     }
     if (xOrdinate - 2 >= 0
         && yOrdinate + 1 < 8
-        && !board.get(yOrdinate + 1).get(xOrdinate - 2).getColour().equals(this.colour)) {
+        && (!board.get(yOrdinate + 1).get(xOrdinate - 2).getColour().equals(this.colour)
+            || checkCheck)) {
       moves.add(new int[] {xOrdinate - 2, yOrdinate + 1});
     }
     if (xOrdinate - 2 >= 0
         && yOrdinate - 1 >= 0
-        && !board.get(yOrdinate - 1).get(xOrdinate - 2).getColour().equals(this.colour)) {
+        && (!board.get(yOrdinate - 1).get(xOrdinate - 2).getColour().equals(this.colour)
+            || checkCheck)) {
       moves.add(new int[] {xOrdinate - 2, yOrdinate - 1});
     }
     if (xOrdinate + 1 < 8
         && yOrdinate + 2 < 8
-        && !board.get(yOrdinate + 2).get(xOrdinate + 1).getColour().equals(this.colour)) {
+        && (!board.get(yOrdinate + 2).get(xOrdinate + 1).getColour().equals(this.colour)
+            || checkCheck)) {
       moves.add(new int[] {xOrdinate + 1, yOrdinate + 2});
     }
     if (xOrdinate + 1 < 8
         && yOrdinate - 2 >= 0
-        && !board.get(yOrdinate - 2).get(xOrdinate + 1).getColour().equals(this.colour)) {
+        && (!board.get(yOrdinate - 2).get(xOrdinate + 1).getColour().equals(this.colour)
+            || checkCheck)) {
       moves.add(new int[] {xOrdinate + 1, yOrdinate - 2});
     }
     if (xOrdinate - 1 >= 0
         && yOrdinate + 2 < 8
-        && !board.get(yOrdinate + 2).get(xOrdinate - 1).getColour().equals(this.colour)) {
+        && (!board.get(yOrdinate + 2).get(xOrdinate - 1).getColour().equals(this.colour)
+            || checkCheck)) {
       moves.add(new int[] {xOrdinate - 1, yOrdinate + 2});
     }
     if (xOrdinate - 1 >= 0
         && yOrdinate - 2 >= 0
-        && !board.get(yOrdinate - 2).get(xOrdinate - 1).getColour().equals(this.colour)) {
+        && (!board.get(yOrdinate - 2).get(xOrdinate - 1).getColour().equals(this.colour)
+            || checkCheck)) {
       moves.add(new int[] {xOrdinate - 1, yOrdinate - 2});
     }
     return moves;
