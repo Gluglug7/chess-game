@@ -122,22 +122,22 @@ public class ChessController {
       }
       if (moves.stream().anyMatch(c -> Arrays.equals(c, new int[] {xOrdinate, yOrdinate}))
           && selectedPiece.getColour().equals(this.turn)) {
-        // Removing the piece from the board if taken
-        // Could include a remove method for each piece that moves it to a position to the side of
-        // the boards
-        if (!piece.getType().equals(Type.EMPTY)) {
-          piece.getImage().setLayoutX(-50);
-          if (piece.getColour().equals(Colour.WHITE)) {
-            whitePieces.remove(piece);
-            whiteTakenPieces.add(piece);
-          } else {
-            blackPieces.remove(piece);
-            blackTakenPieces.add(piece);
-          }
-        }
-
         // If the move would put the player in check, then the move is invalid
         if (simulateMove(xOrdinate, yOrdinate)) {
+          // Removing the piece from the board if taken
+          // Could include a remove method for each piece that moves it to a position to the side of
+          // the boards
+          if (!piece.getType().equals(Type.EMPTY)) {
+            piece.getImage().setLayoutX(-50);
+            if (piece.getColour().equals(Colour.WHITE)) {
+              whitePieces.remove(piece);
+              whiteTakenPieces.add(piece);
+            } else {
+              blackPieces.remove(piece);
+              blackTakenPieces.add(piece);
+            }
+            piece = new Empty();
+          }
           // Only moving if the move would not put the player in check
           move(xOrdinate, yOrdinate);
           pieceSelected = false;
