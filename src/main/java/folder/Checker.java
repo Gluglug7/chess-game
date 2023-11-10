@@ -101,7 +101,6 @@ public class Checker {
         checkmate = true;
       }
     }
-    GameState.checkmate = checkmate;
     return checkmate;
   }
 

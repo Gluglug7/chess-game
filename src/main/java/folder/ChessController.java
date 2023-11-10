@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
@@ -22,6 +23,8 @@ public class ChessController {
   public static Set<Piece> blackPieces;
   public static Set<Piece> whiteTakenPieces;
   public static Set<Piece> blackTakenPieces;
+
+  @FXML public Label textLabel;
 
   @FXML public ImageView bRookOne;
   @FXML public ImageView bKnightOne;
@@ -86,6 +89,7 @@ public class ChessController {
     }
     pieceSelected = false;
     turn = Colour.WHITE;
+    textLabel.setText("White's turn");
   }
 
   /**
@@ -106,6 +110,11 @@ public class ChessController {
         if (castle(xOrdinate, yOrdinate)) {
           pieceSelected = false;
           turn = turn.equals(Colour.WHITE) ? Colour.BLACK : Colour.WHITE;
+          if (GameState.check) {
+            setText("Check!");
+          } else {
+            setText((turn.equals(Colour.WHITE) ? "White" : "Black") + "'s turn");
+          }
           System.out.println("Castle");
           printTurnDetails(piece, xOrdinate, yOrdinate);
           return;
@@ -133,8 +142,14 @@ public class ChessController {
           move(xOrdinate, yOrdinate);
           pieceSelected = false;
           turn = turn.equals(Colour.WHITE) ? Colour.BLACK : Colour.WHITE;
+          if (GameState.check) {
+            setText("Check!");
+          } else {
+            setText((turn.equals(Colour.WHITE) ? "White" : "Black") + "'s turn");
+          }
         } else {
           // Telling the player why the move is invalid
+          setText(GameState.checkmate ? "Checkmate!" : "Invalid move!");
           System.out.println(
               GameState.checkmate
                   ? "Checkmate! The game is over, you cannot move!"
@@ -257,6 +272,7 @@ public class ChessController {
     selectedPos = new int[] {xOrdinate, yOrdinate};
     selectedImage = selectedPiece.getImage();
     moves = selectedPiece.moveSet(board.getBoard(), false);
+    setText(selectedPiece.getType() + " selected");
   }
 
   /**
@@ -286,21 +302,38 @@ public class ChessController {
   private void checkAllChecks() {
     if (checker.checkCheck(Colour.WHITE, board.getBoard()) > 0) {
       GameState.check = true;
+      setText("Check!");
       System.out.println("White is in check");
       if (checker.checkCheckMate(Colour.WHITE)) {
         GameState.checkmate = true;
+        setText("Checkmate!");
         System.out.println("White is in checkmate");
       }
     } else if (checker.checkCheck(Colour.BLACK, board.getBoard()) > 0) {
       GameState.check = true;
+      setText("Check!");
       System.out.println("Black is in check");
       if (checker.checkCheckMate(Colour.BLACK)) {
         GameState.checkmate = true;
+        setText("Checkmate!");
         System.out.println("Black is in checkmate");
       }
     } else {
       GameState.check = false;
       GameState.checkmate = false;
     }
+  }
+
+  /**
+   * Method to set the text of the text label. If the game is in checkmate, then the text is set to
+   * "Checkmate!". If the game is in check, then the text is set to "Check!".
+   *
+   * @param text The text to set the text label to.
+   */
+  private void setText(String text) {
+    if (GameState.checkmate) {
+      text = "Checkmate!";
+    }
+    textLabel.setText(text);
   }
 }

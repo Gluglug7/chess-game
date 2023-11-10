@@ -23,6 +23,7 @@ public class App extends Application {
   public void start(final Stage stage) throws IOException {
     scene = new Scene(loadFxml("chess"));
     stage.setScene(scene);
+    stage.setResizable(false);
     stage.show();
   }
 }

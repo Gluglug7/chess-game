@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="folder.ChessController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="504.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="folder.ChessController">
    <children>
-      <ImageView id="Wood texture" fitHeight="400.0" fitWidth="714.0" layoutX="-57.0" rotate="90.0">
+      <ImageView id="Wood texture" fitHeight="400.0" fitWidth="714.0" layoutX="-57.0" layoutY="-157.0" rotate="90.0">
          <image>
             <Image url="@../images/texture.JPG" />
          </image>
@@ -236,5 +238,12 @@
             <Image url="@../images/white-rook.png" />
          </image>
       </ImageView>
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#9a9a9a" height="91.0" layoutX="100.0" layoutY="409.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="400.0" />
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#c6c6c6" height="91.0" layoutX="120.0" layoutY="409.0" stroke="#9a9a9a" strokeType="INSIDE" strokeWidth="5.0" width="355.0" />
+      <Label id="textLabel" fx:id="textLabel" alignment="CENTER" layoutX="149.0" layoutY="409.0" prefHeight="91.0" prefWidth="303.0" text="..." textAlignment="CENTER">
+         <font>
+            <Font name="Adobe Naskh Medium" size="50.0" />
+         </font>
+      </Label>
    </children>
 </Pane>
