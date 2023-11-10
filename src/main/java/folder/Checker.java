@@ -23,15 +23,33 @@ public class Checker {
   /**
    * Method to check whether one side is in check or not. Method goes through all opposing pieces
    * and checks if any of them can move to the king's position. If at least one can, then it is a
-   * check.
+   * check. Does not require the position of the king to be known. Finds the king's position and
+   * then calls the same method using the king's position.
    *
    * @param colour The colour of the king to check.
    * @param boardToCheck The board to check for a check.
+   * @return The number of pieces checking the king.
    */
   public int checkCheck(Colour colour, List<List<Piece>> boardToCheck) {
+    // Finding the position of the king using the king's image
     ImageView king = colour.equals(Colour.WHITE) ? controller.wKing : controller.bKing;
     int kingX = (int) (king.getLayoutX() - 100) / 50;
     int kingY = (int) king.getLayoutY() / 50;
+    return checkCheck(colour, boardToCheck, kingX, kingY);
+  }
+
+  /**
+   * Method to check whether one side is in check or not. Method goes through all opposing pieces
+   * and checks if any of them can move to the king's position. If at least one can, then it is a
+   * check. Requires the position of the king to already be known.
+   *
+   * @param colour The colour of the king to check.
+   * @param boardToCheck The board to check for a check.
+   * @param kingX The x position of the king.
+   * @param kingY The y position of the king.
+   * @return The number of pieces checking the king.
+   */
+  public int checkCheck(Colour colour, List<List<Piece>> boardToCheck, int kingX, int kingY) {
     checkingPieces.clear();
     int checkingNumber = 0;
 
@@ -83,6 +101,7 @@ public class Checker {
         checkmate = true;
       }
     }
+    GameState.checkmate = checkmate;
     return checkmate;
   }
 

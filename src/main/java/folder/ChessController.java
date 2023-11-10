@@ -6,6 +6,7 @@ import folder.pieces.Piece.Colour;
 import folder.pieces.Piece.Type;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
@@ -87,7 +88,6 @@ public class ChessController {
     turn = Colour.WHITE;
   }
 
-  // TODO: Prevent pieces from moving in check
   /**
    * Method called when a tile is clicked. Finds the position of the tile clicked and performs the
    * approriate action.
@@ -126,9 +126,20 @@ public class ChessController {
             blackTakenPieces.add(piece);
           }
         }
-        move(xOrdinate, yOrdinate);
-        pieceSelected = false;
-        turn = turn.equals(Colour.WHITE) ? Colour.BLACK : Colour.WHITE;
+
+        // If the move would put the player in check, then the move is invalid
+        if (simulateMove(xOrdinate, yOrdinate)) {
+          // Only moving if the move would not put the player in check
+          move(xOrdinate, yOrdinate);
+          pieceSelected = false;
+          turn = turn.equals(Colour.WHITE) ? Colour.BLACK : Colour.WHITE;
+        } else {
+          // Telling the player why the move is invalid
+          System.out.println(
+              GameState.checkmate
+                  ? "Checkmate! The game is over, you cannot move!"
+                  : "Invalid move! Cannot move into check!");
+        }
       }
     }
     // Not else if statement because user may want to select another piece to move
@@ -156,6 +167,28 @@ public class ChessController {
     selectedImage.setLayoutX(xOrdinate * 50 + 100);
     selectedImage.setLayoutY(yOrdinate * 50);
     checkAllChecks();
+  }
+
+  /**
+   * Method called when simulating a move. Creates a clone of the board and moves the selected piece
+   * to the given coordinates. Checks whether the move would put the player in check.
+   *
+   * @param xOrdinate The x ordinate of the tile to move to.
+   * @param yOrdinate The y ordinate of the tile to move to.
+   * @return Whether the move would put the player in check.
+   */
+  private boolean simulateMove(int xOrdinate, int yOrdinate) {
+    // Using board clone as not to affect the original board
+    List<List<Piece>> boardClone = board.cloneBoard();
+    Piece piece = boardClone.get(selectedPos[1]).get(selectedPos[0]);
+    boardClone.get(selectedPos[1]).set(selectedPos[0], new Empty());
+    boardClone.get(yOrdinate).set(xOrdinate, piece);
+    // If the piece is the king, then using its new coordinates to check for check
+    if (piece.getType().equals(Type.KING)) {
+      return checker.checkCheck(piece.getColour(), boardClone, xOrdinate, yOrdinate) == 0;
+    } else {
+      return checker.checkCheck(piece.getColour(), boardClone) == 0;
+    }
   }
 
   /**
@@ -255,19 +288,19 @@ public class ChessController {
       GameState.check = true;
       System.out.println("White is in check");
       if (checker.checkCheckMate(Colour.WHITE)) {
-        GameState.checkMate = true;
+        GameState.checkmate = true;
         System.out.println("White is in checkmate");
       }
     } else if (checker.checkCheck(Colour.BLACK, board.getBoard()) > 0) {
       GameState.check = true;
       System.out.println("Black is in check");
       if (checker.checkCheckMate(Colour.BLACK)) {
-        GameState.checkMate = true;
+        GameState.checkmate = true;
         System.out.println("Black is in checkmate");
       }
     } else {
       GameState.check = false;
-      GameState.checkMate = false;
+      GameState.checkmate = false;
     }
   }
 }
